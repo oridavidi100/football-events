@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 const PORT = 5000;
 export const app = express();
 
-// app.use(cors()); //cors middleware
+app.use(cors()); //cors middleware
 app.use(express.json()); //json middleware
 
 export const server = app.listen(PORT, () =>
