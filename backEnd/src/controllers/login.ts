@@ -1,22 +1,25 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/user');
-const jwt = require('jsonwebtoken');
-const SECRET = require('../config');
+import bcrypt from 'bcrypt';
+import { User } from '../models/User';
+import jwt from 'jsonwebtoken';
+import config from '../config';
+import { NextFunction, Request, Response } from 'express';
 interface Body {
   email: string;
   name: string;
 }
-exports.login = async (req, res, next) => {
+const secret = config.secret;
+exports.login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const body: Body | any = {};
     const { password, username } = req.params;
     const usersArr = await User.find({ username: username });
+    console.log(secret);
     for (let user of usersArr) {
       let ans = await bcrypt.compare(password, user.password);
       if (ans === true) {
         body.email = user.email;
-        body.name = user.name;
-        const accessToken = jwt.sign(username, SECRET);
+        body.fullName = user.fullName;
+        const accessToken = jwt.sign(body, secret as string);
         return res.send({ body, accessToken });
       }
     }
@@ -25,7 +28,6 @@ exports.login = async (req, res, next) => {
     }
     throw { status: 400, message: 'username not exist' };
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
