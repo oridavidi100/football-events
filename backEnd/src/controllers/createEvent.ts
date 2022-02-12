@@ -3,7 +3,6 @@ import { NextFunction, Request, Response } from 'express';
 import { User } from '../models/User';
 import { nanoid } from 'nanoid';
 exports.createEvent = (req: Request, res: Response, next: NextFunction) => {
-  console.log('hello');
   const { location, date } = req.body;
   if (!location || !date) {
     throw { status: 400, message: 'missing fields' };
