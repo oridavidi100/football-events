@@ -12,6 +12,9 @@ exports.register = async (req: Request, res: Response, next: NextFunction) => {
     if (usersArr.length > 0) {
       throw { status: 400, message: 'user already exist' };
     }
+    if (!validateEmail(email)) {
+      throw { status: 400, message: 'email is not valid' };
+    }
     const user = await User.create({
       email,
       password,
@@ -25,3 +28,12 @@ exports.register = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
+
+function validateEmail(emailAdress: string): boolean {
+  let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (emailAdress.match(regexEmail)) {
+    return true;
+  } else {
+    return false;
+  }
+}
