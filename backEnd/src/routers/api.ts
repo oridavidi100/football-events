@@ -2,9 +2,10 @@ import express from 'express';
 import loginRouter from './login';
 import tokenExtractor from '../midllewares/accessToken';
 import registerRouter from './register';
+import EventRouter from './events';
 const router = express.Router();
 router.use('/register', registerRouter);
 router.use(tokenExtractor);
 router.use('/login', loginRouter);
-
+router.use('/Event', EventRouter);
 export default router;
