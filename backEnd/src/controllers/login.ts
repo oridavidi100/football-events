@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { User } from '../models/User';
 import jwt from 'jsonwebtoken';
 import config from '../config';
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, raw, Request, Response } from 'express';
 interface Body {
   email: string;
   name: string;
@@ -10,10 +10,14 @@ interface Body {
 const secret = config.secret;
 exports.login = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    if (req.body.user) {
+      // const usersArr = await User.find({ email: req.body.user.email });
+      return res.send(req.body.user);
+    }
     const body: Body | any = {};
-    const { password, username } = req.params;
-    const usersArr = await User.find({ username: username });
-    console.log(secret);
+    const { password, email } = req.body;
+    const usersArr = await User.find({ email: email });
+    console.log(email, password);
     for (let user of usersArr) {
       let ans = await bcrypt.compare(password, user.password);
       if (ans === true) {
@@ -26,7 +30,7 @@ exports.login = async (req: Request, res: Response, next: NextFunction) => {
     if (usersArr.length > 0) {
       throw { status: 400, message: 'password incorrect' };
     }
-    throw { status: 400, message: 'username not exist' };
+    throw { status: 400, message: 'user not exist' };
   } catch (error) {
     next(error);
   }
