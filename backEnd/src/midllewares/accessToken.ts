@@ -13,7 +13,6 @@ function tokenExtractor(req: Request, res: Response, next: NextFunction) {
           authorization.substring(7),
           secret as string
         );
-        console.log(req.body.user, 'heer');
         next();
       } catch {
         throw { status: 401, message: 'token invalid' };
