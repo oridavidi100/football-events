@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema<User>(
       type: String,
       required: true,
     },
+    fullName: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
