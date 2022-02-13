@@ -3,6 +3,7 @@ import { User } from '../../@types/user';
 
 const UserSchema = new mongoose.Schema<User>(
   {
+    _id: { type: String, required: true },
     email: {
       type: String,
       required: true,
@@ -20,6 +21,9 @@ const UserSchema = new mongoose.Schema<User>(
     fullName: {
       type: String,
       required: true,
+    },
+    position: {
+      type: String,
     },
   },
   { timestamps: true }

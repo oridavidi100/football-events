@@ -4,4 +4,5 @@ export interface Event {
   Players: string[];
   date: Date;
   creator: string;
+  img: string;
 }
