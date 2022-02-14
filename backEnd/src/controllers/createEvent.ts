@@ -35,7 +35,7 @@ exports.getAllEvents = async (
     const events = await Event.find().populate({
       path: 'Players',
       model: 'User',
-      select: { fullName: 1, email: 1 },
+      select: { fullName: 1, email: 1, position: 1 },
     });
     res.send(events);
   } catch (error) {

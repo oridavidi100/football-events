@@ -23,6 +23,7 @@ exports.login = async (req: Request, res: Response, next: NextFunction) => {
         body.email = user.email;
         body.fullName = user.fullName;
         body.id = user._id;
+        body.position = user.position;
         const accessToken = jwt.sign(body, secret as string);
         return res.send({ body, accessToken });
       }
