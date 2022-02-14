@@ -11,7 +11,6 @@ const secret = config.secret;
 exports.login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (req.body.user) {
-      // const usersArr = await User.find({ email: req.body.user.email });
       return res.send(req.body.user);
     }
     const body: Body | any = {};
@@ -23,6 +22,7 @@ exports.login = async (req: Request, res: Response, next: NextFunction) => {
       if (ans === true) {
         body.email = user.email;
         body.fullName = user.fullName;
+        body.id = user._id;
         const accessToken = jwt.sign(body, secret as string);
         return res.send({ body, accessToken });
       }
