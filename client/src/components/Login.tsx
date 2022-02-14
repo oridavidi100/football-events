@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './style/login.css';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../reducer/actions/action';
 function Login() {
+  const dispatch = useDispatch();
   const email = useRef<string | any>('');
   const password = useRef<string | any>('');
   const [error, setError] = useState<string | any>('');
@@ -22,7 +25,8 @@ function Login() {
       axios
         .post('http://localhost:5000/login', {}, config)
         .then(res => {
-          console.log(res);
+          console.log(res.data);
+          dispatch(setUser(res.data));
           navigate('/HomePage');
         })
         .catch(err => {
@@ -35,12 +39,12 @@ function Login() {
   ): Promise<any> => {
     try {
       e.preventDefault();
-      console.log(email.current.value);
-      console.log(password.current.value);
       const res = await axios.post('http://localhost:5000/login', {
         email: email.current.value,
         password: password.current.value,
       });
+      console.log(res.data);
+      dispatch(setUser(res.data.body));
       document.cookie =
         'accessToken' + '=' + res.data.accessToken + ';expires=' + '120';
       navigate('/HomePage');
