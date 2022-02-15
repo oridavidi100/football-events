@@ -19,9 +19,11 @@ exports.forgetPassword = async (
         user.password = newPasswordHash;
         await user.save();
         console.log(user);
-        return res.status(200).send(user);
+        return res
+          .status(200)
+          .send({ message: 'password changed', username: user.fullName });
       }
-      throw { status: 400, message: 'user not found' };
+      throw { status: 400, message: 'name of pet not right' };
     }
   } catch (error) {
     next(error);
