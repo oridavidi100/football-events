@@ -58,25 +58,34 @@ function Login() {
       <div className="shape"></div>
       <div className="shape"></div>
       <form className="loginForm" onSubmit={e => handleSubmit(e)}>
-        <input type="text" placeholder="email " ref={email} required={true} />
         <input
+          type="text"
+          placeholder="email "
+          ref={email}
+          required={true}
+          className="inputL"
+        />
+        <input
+          className="inputL"
           type="password"
           placeholder="password"
           ref={password}
           required={true}
         />
-        <button type="submit">Login</button>
+        <button type="submit" className="buttonl">
+          Login
+        </button>
       </form>
       <div className="errorMessage">{error}</div>
       <button
-        className="loginOptionsButtons"
+        className="buttonl"
         type="button"
         onClick={() => navigate('/forgetpassword')}
       >
         forget password
       </button>
       <button
-        className="loginOptionsButtons"
+        className="buttonl"
         type="button"
         onClick={() => navigate('/register')}
       >

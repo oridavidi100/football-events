@@ -17,7 +17,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
 }
-input {
+.inputL {
   width: 100%;
   height: 20px;
   background: #e0dede;
@@ -29,7 +29,7 @@ input {
   outline: none;
   border-radius: 5px;
 }
-button {
+.buttonl {
   /* width: 60%; */
   height: 23px;
   margin: 10px auto;
