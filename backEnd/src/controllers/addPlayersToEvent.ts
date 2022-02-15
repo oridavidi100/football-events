@@ -19,12 +19,12 @@ exports.addplayersToEvent = async (
     event.Players = players;
     await event.save();
     console.log(event);
-    res.status(200).send(event + 'seccess');
+    res.status(200).send({ event, message: 'seccess', button: 'join' });
   } else {
     players.push(user.id);
     event.Players = players;
     await event.save();
     console.log(event);
-    res.status(200).send(event + 'seccess');
+    res.status(200).send({ event, message: 'seccess', button: 'remove' });
   }
 };

@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Event, User } from '../@types';
+import { useSelector, useDispatch } from 'react-redux';
+import { setButton } from '../reducer/actions/action';
+import { getCookie } from '../service/servicesfunc';
 function EventPage({ event }: { event: Event }) {
   console.log(event.Players);
+  const user = useSelector((state: any) => state.user);
+  //   const [button, setButton] = useState<string | any>('');
+  const button = useSelector((state: any) => state.button);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const getCookie = (name: string) => {
-    const value = `; ${document.cookie}`;
-    const parts: any = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  };
+  useEffect((): any => {
+    if (!document.cookie) {
+      navigate('/');
+    }
+    for (let player of event.Players) {
+      console.log(player._id);
+      if (player._id === user.id) {
+        console.log('ues');
+        return dispatch(setButton('remove'));
+      }
+    }
+    return dispatch(setButton('join'));
+  }, []);
+
   const handleClick = async () => {
     const config = {
       headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
@@ -22,6 +38,8 @@ function EventPage({ event }: { event: Event }) {
         },
         config
       );
+      console.log(res.data.button);
+      dispatch(setButton(res.data.button));
     } catch (err: any) {
       console.log(err.response.data.error);
     }
@@ -46,7 +64,7 @@ function EventPage({ event }: { event: Event }) {
         })}
       </div>
       <button type="button" onClick={handleClick}>
-        join
+        {button}
       </button>
       <button type="button" onClick={() => navigate('/HomePage')}>
         to home page

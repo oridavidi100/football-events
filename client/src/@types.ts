@@ -5,7 +5,7 @@ export interface User {
   position: string | undefined;
 }
 export interface Event {
-  Players: User[];
+  Players: User[] | any;
   createdAt: string;
   creator: string;
   date: string;
