@@ -4,6 +4,8 @@ import axios from 'axios';
 import './style/login.css';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../reducer/actions/action';
+import { getCookie } from '../service/servicesfunc';
+
 function Login() {
   const dispatch = useDispatch();
   const email = useRef<string | any>('');
@@ -12,11 +14,6 @@ function Login() {
   const navigate = useNavigate();
   useEffect(() => {
     //function that check if the user is logged in before
-    const getCookie = (name: string) => {
-      const value = `; ${document.cookie}`;
-      const parts: any = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
-    };
 
     if (getCookie('accessToken')) {
       const config = {

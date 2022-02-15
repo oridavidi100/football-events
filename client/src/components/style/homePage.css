@@ -2,3 +2,9 @@
   align-items: center;
   text-align: center;
 }
+.createEventHide {
+  display: none;
+}
+.createEvent {
+  display: block;
+}

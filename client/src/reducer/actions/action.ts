@@ -16,6 +16,10 @@ export const setEvents = (events: any) => {
   return { type: 'SET_EVENTS', payload: eventArr };
 };
 
-export const setUser = (user: User) => {
+export const setUser = (user: User | string) => {
   return { type: 'SET_USER', payload: user };
+};
+
+export const setButton = (button: string) => {
+  return { type: 'SET_BUTTON', payload: button };
 };

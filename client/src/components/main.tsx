@@ -13,7 +13,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import EventPage from './EventPage';
 function App() {
   const dispatch = useDispatch();
+  const button = useSelector((state: any) => state.button);
   const events = useSelector((state: any) => state.events);
+
   useEffect(() => {
     axios
       .get('http://localhost:5000/getAllEvents')
@@ -23,7 +25,8 @@ function App() {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [button]);
   return (
     <Router>
       <div className="App">
@@ -31,7 +34,10 @@ function App() {
           {events &&
             events.map((event: Event) => {
               return (
-                <Route path={event._id} element={<EventPage event={event} />} />
+                <Route
+                  path={event._id}
+                  element={<EventPage event={event} key={event._id} />}
+                />
               );
             })}
 

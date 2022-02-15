@@ -5,13 +5,15 @@ interface Action {
 }
 
 interface InitalState {
-  user: User | undefined;
-  events: Event | undefined;
+  user: User | string;
+  events: Event | string;
+  button: string;
 }
 
 const initalState: InitalState = {
-  user: undefined,
-  events: undefined,
+  user: '',
+  events: '',
+  button: '',
 };
 
 const rootreducer = (state = initalState, action: Action) => {
@@ -20,6 +22,8 @@ const rootreducer = (state = initalState, action: Action) => {
       return { ...state, events: action.payload };
     case 'SET_USER':
       return { ...state, user: action.payload };
+    case 'SET_BUTTON':
+      return { ...state, button: action.payload };
     default:
       return state;
   }
