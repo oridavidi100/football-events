@@ -1,3 +1,7 @@
+body {
+  text-align: center;
+}
+
 .eventsList {
   align-items: center;
   text-align: center;
@@ -7,4 +11,15 @@
 }
 .createEvent {
   display: block;
+}
+.event {
+  border: 1px solid #f00;
+  /* Set Border For Only Specific Side */
+  border-left: 1px solid #00f;
+  border-right: 1px solid #00f;
+  border-top: 1px solid #00f;
+  border-bottom: 1px solid #00f;
+  /* Another Rules Can Be Applied*/
+  border-top-style: solid dashed dotted;
+  border-top-width: 2px;
 }
