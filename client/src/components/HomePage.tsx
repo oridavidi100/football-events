@@ -8,22 +8,29 @@ import axios from 'axios';
 import { getCookie } from '../service/servicesfunc';
 import { setEvents } from '../reducer/actions/action';
 
-function HomePage() {
+function HomePage({
+  setEventShown,
+  eventShown,
+}: {
+  eventShown: Event[];
+  setEventShown: React.Dispatch<React.SetStateAction<Event[]>>;
+}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useRef<string | any>('');
   const date = useRef<string | any>('');
   const imgSrc = useRef<string | any>('');
-  const [formclass, setFormclass] = useState<string>('createEventHide');
-  const events = useSelector((state: any) => state.events);
-  const user = useSelector((state: any) => state.user);
+  const adress = useRef<string | any>('');
+  const search = useRef<string | any>('');
 
+  const [formclass, setFormclass] = useState<string>('createEventHide');
+  let events = useSelector((state: any) => state.events);
+  const user = useSelector((state: any) => state.user);
   useEffect(() => {
     if (!document.cookie) {
       navigate('/');
     }
   });
-
   const logout = () => {
     console.log('logout');
     document.cookie =
@@ -32,7 +39,7 @@ function HomePage() {
     navigate('/');
   };
 
-  const addEvent = async () => {
+  const addEvent = () => {
     if (formclass === 'createEventHide') {
       setFormclass('createEvent');
     } else {
@@ -52,6 +59,7 @@ function HomePage() {
           location: location.current.value,
           date: date.current.value,
           imgSrc: imgSrc.current.value,
+          adress: adress.current.value,
         },
         config
       );
@@ -63,11 +71,28 @@ function HomePage() {
         .catch(err => {
           console.log(err);
         });
+      addEvent();
+      location.current.value = '';
+      date.current.value = '';
+      imgSrc.current.value = '';
+      adress.current.value = '';
       console.log(res.data);
     } catch (err: any) {
       console.log(err.response.data.error);
     }
   };
+
+  const handleChange = () => {
+    const searchI = search.current.value.toLocaleLowerCase();
+    console.log(searchI);
+    setEventShown(
+      events.filter((event: Event) => {
+        console.log(event.location.toLocaleLowerCase());
+        return event.location.toLocaleLowerCase().includes(searchI);
+      })
+    );
+  };
+
   return (
     <div className="homePage">
       <div className="homePage__header">
@@ -75,8 +100,17 @@ function HomePage() {
         {''} wellcome to the home page of the best football events over the
         countery
       </div>
-      <button onClick={logout}>logout</button>
-      <button onClick={addEvent}>add event </button>
+      <nav>
+        <button onClick={logout}>logout</button>
+        <button onClick={addEvent}>add event </button>
+        <button
+          onClick={() => {
+            navigate('/profile');
+          }}
+        >
+          profile
+        </button>
+      </nav>
       <form
         onSubmit={e => {
           handlesubmit(e);
@@ -85,12 +119,17 @@ function HomePage() {
       >
         <input type="text" placeholder="location" ref={location} />
         <input type="date" placeholder="date" ref={date} />
-        <input type="text" placeholder="image link" ref={imgSrc} />
+        <input type="text" placeholder="adresss" ref={adress} />
+        <input type="url" placeholder="image link" ref={imgSrc} />
         <button>create</button>
       </form>
+
+      <p>search event by city </p>
+      <input type="text" onChange={handleChange} ref={search}></input>
+
       <div className="eventsList">
-        {events &&
-          events.map((event: Event) => {
+        {eventShown &&
+          eventShown.map((event: Event) => {
             return (
               <div className="event" key={event._id}>
                 <p> location: {event.location}</p>

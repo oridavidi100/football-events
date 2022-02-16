@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // import './App.css';
 import axios from 'axios';
 import { setEvents } from '../reducer/actions/action';
@@ -11,11 +11,17 @@ import Register from './Register';
 import ForgetPassword from './ForgetPassword';
 import { useSelector, useDispatch } from 'react-redux';
 import EventPage from './EventPage';
+import ProfilePage from './ProfilePage';
 function App() {
   const dispatch = useDispatch();
   const button = useSelector((state: any) => state.button);
   const events = useSelector((state: any) => state.events);
-
+  const [eventShown, setEventShown] = useState<Event[]>(events);
+  useEffect(() => {
+    if (events) {
+      setEventShown(events);
+    }
+  }, [events]);
   useEffect(() => {
     axios
       .get('http://localhost:5000/getAllEvents')
@@ -25,6 +31,7 @@ function App() {
       .catch(err => {
         console.log(err);
       });
+    setEventShown(events);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [button]);
   return (
@@ -42,9 +49,15 @@ function App() {
             })}
 
           {/* <Route path="/:word/:partOfSpeech" element={<WordAndPos />} /> */}
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/HomePage" element={<HomePage />} />
+          <Route
+            path="/HomePage"
+            element={
+              <HomePage eventShown={eventShown} setEventShown={setEventShown} />
+            }
+          />
           <Route path="/notfound" element={<NotFound />} />
           <Route path="/" element={<Login />} />
         </Routes>
