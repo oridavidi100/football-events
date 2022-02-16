@@ -12,4 +12,5 @@ export interface Event {
   img: string;
   location: string;
   _id: string;
+  adress: string;
 }

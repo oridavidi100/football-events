@@ -47,6 +47,12 @@ function EventPage({ event }: { event: Event }) {
   return (
     <div className="eventpage">
       <p> location: {event.location}</p>
+      <address>
+        adress:
+        <a href={`https://maps.google.com/?q=${event.adress}`}>
+          {event.adress}
+        </a>
+      </address>
       <p> date :{event.date}</p>
       <p>{event.createdAt}</p>
       <p> creator :{event.creator}</p>

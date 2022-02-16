@@ -25,6 +25,10 @@ const EventSchema = new mongoose.Schema<Event>(
     img: {
       type: String,
     },
+    adress: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

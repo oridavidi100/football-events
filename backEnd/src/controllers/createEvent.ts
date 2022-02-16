@@ -4,7 +4,7 @@ import { User } from '../models/User';
 import { nanoid } from 'nanoid';
 exports.createEvent = (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { location, date, imgSrc } = req.body;
+    const { location, date, imgSrc, adress } = req.body;
     if (!location || !date) {
       throw { status: 400, message: 'missing fields' };
     }
@@ -18,6 +18,7 @@ exports.createEvent = (req: Request, res: Response, next: NextFunction) => {
       date,
       creator: user.fullName,
       img: imgSrc,
+      adress,
     });
     event.save();
     res.send(event);

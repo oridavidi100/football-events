@@ -11,6 +11,7 @@ export const setEvents = (events: any) => {
       img: event.img,
       location: event.location,
       _id: event._id,
+      adress: event.adress,
     });
   }
   return { type: 'SET_EVENTS', payload: eventArr };
