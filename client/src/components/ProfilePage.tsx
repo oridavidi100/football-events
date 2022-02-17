@@ -13,9 +13,6 @@ function ProfilePage() {
           <p>{user.fullName}</p>
           <p>{user.email}</p>
           <p>{user.position}</p>
-          <button type="button" onClick={() => navigate('/HomePage')}>
-            to home page
-          </button>
         </div>
       )}
     </div>

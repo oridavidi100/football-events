@@ -114,9 +114,6 @@ function EventPage({ event }: { event: Event }) {
       <button type="button" onClick={handleClick}>
         {button}
       </button>
-      <button type="button" onClick={() => navigate('/HomePage')}>
-        to home page
-      </button>
       <button type="button" onClick={bringBall}>
         bring ball
       </button>

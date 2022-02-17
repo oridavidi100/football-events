@@ -12,6 +12,7 @@ import ForgetPassword from './ForgetPassword';
 import { useSelector, useDispatch } from 'react-redux';
 import EventPage from './EventPage';
 import ProfilePage from './ProfilePage';
+import Navbar from './Navbar';
 function App() {
   const dispatch = useDispatch();
   const button = useSelector((state: any) => state.button);
@@ -36,6 +37,7 @@ function App() {
   }, [button]);
   return (
     <Router>
+      <Navbar />
       <div className="App">
         <Routes>
           {events &&
