@@ -7,6 +7,7 @@ import { setUser } from '../reducer/actions/action';
 import axios from 'axios';
 import { getCookie } from '../service/servicesfunc';
 import { setEvents } from '../reducer/actions/action';
+import moment from 'moment';
 
 function HomePage({
   setEventShown,
@@ -22,12 +23,12 @@ function HomePage({
   const imgSrc = useRef<string | any>('');
   const adress = useRef<string | any>('');
   const search = useRef<string | any>('');
-
+  const time = useRef<string | any>('');
   const [formclass, setFormclass] = useState<string>('createEventHide');
   let events = useSelector((state: any) => state.events);
   const user = useSelector((state: any) => state.user);
   useEffect(() => {
-    if (!document.cookie) {
+    if (!document.cookie || !user) {
       navigate('/');
     }
   });
@@ -50,6 +51,7 @@ function HomePage({
   const handlesubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      const dateAndTime = date.current.value + ' ' + time.current.value;
       const config = {
         headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
       };
@@ -57,7 +59,7 @@ function HomePage({
         'http://localhost:5000/Event/create',
         {
           location: location.current.value,
-          date: date.current.value,
+          date: dateAndTime,
           imgSrc: imgSrc.current.value,
           adress: adress.current.value,
         },
@@ -69,7 +71,7 @@ function HomePage({
           dispatch(setEvents(res.data));
         })
         .catch(err => {
-          console.log(err);
+          console.log(err.response.data.error);
         });
       addEvent();
       location.current.value = '';
@@ -119,8 +121,9 @@ function HomePage({
       >
         <input type="text" placeholder="location" ref={location} />
         <input type="date" placeholder="date" ref={date} />
-        <input type="text" placeholder="adresss" ref={adress} />
+        <input type="adress" placeholder="adresss" ref={adress} />
         <input type="url" placeholder="image link" ref={imgSrc} />
+        <input type="time" placeholder="time" ref={time} />
         <button>create</button>
       </form>
 
@@ -133,7 +136,10 @@ function HomePage({
             return (
               <div className="event" key={event._id}>
                 <p> location: {event.location}</p>
-                <p> date :{event.date}</p>
+                <p>
+                  {' '}
+                  date :{moment(event.date).format('MMMM Do YYYY, h:mm:ss a')}
+                </p>
                 <Link to={`/${event._id}`}>more details</Link>
 
                 <img
