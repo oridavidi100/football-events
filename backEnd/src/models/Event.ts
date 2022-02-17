@@ -29,6 +29,12 @@ const EventSchema = new mongoose.Schema<Event>(
       type: String,
       required: true,
     },
+    balls: [
+      {
+        type: mongoose.Schema.Types.String,
+        ref: 'User',
+      },
+    ],
   },
   { timestamps: true }
 );

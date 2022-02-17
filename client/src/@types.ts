@@ -1,4 +1,5 @@
 export interface User {
+  _id: string;
   email: string;
   fullName: string;
   id: string;
@@ -13,4 +14,5 @@ export interface Event {
   location: string;
   _id: string;
   adress: string;
+  balls: User[] | any;
 }

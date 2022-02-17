@@ -5,13 +5,15 @@ import { Event, User } from '../@types';
 import { useSelector, useDispatch } from 'react-redux';
 import { setButton } from '../reducer/actions/action';
 import { getCookie } from '../service/servicesfunc';
+import moment from 'moment';
+import { setEvents } from '../reducer/actions/action';
+
 function EventPage({ event }: { event: Event }) {
-  console.log(event.Players);
   const user = useSelector((state: any) => state.user);
-  //   const [button, setButton] = useState<string | any>('');
   const button = useSelector((state: any) => state.button);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect((): any => {
     if (!document.cookie) {
       navigate('/');
@@ -25,6 +27,16 @@ function EventPage({ event }: { event: Event }) {
     }
     return dispatch(setButton('join'));
   }, []);
+
+  const hasBall = (id: string) => {
+    console.log(id);
+    for (let player of event.balls) {
+      if (player._id === id) {
+        return true;
+      }
+    }
+    return false;
+  };
 
   const handleClick = async () => {
     const config = {
@@ -44,6 +56,36 @@ function EventPage({ event }: { event: Event }) {
       console.log(err.response.data.error);
     }
   };
+
+  const bringBall = async () => {
+    const config = {
+      headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
+    };
+    try {
+      const res = await axios.post(
+        'http://localhost:5000/Event/giveBall',
+        {
+          eventId: event._id,
+        },
+        config
+      );
+      console.log(res.data);
+      axios
+        .get('http://localhost:5000/getAllEvents')
+        .then(res => {
+          dispatch(setEvents(res.data));
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } catch (err: any) {
+      console.log(err.response.data.error);
+    }
+  };
+  if (event) {
+    console.log(event);
+  }
+
   return (
     <div className="eventpage">
       <p> location: {event.location}</p>
@@ -53,17 +95,17 @@ function EventPage({ event }: { event: Event }) {
           {event.adress}
         </a>
       </address>
-      <p> date :{event.date}</p>
-      <p>{event.createdAt}</p>
+      <p> date :{moment(event.date).format('MMMM Do YYYY, h:mm:ss a')}</p>
+      <p>{moment(event.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p>
       <p> creator :{event.creator}</p>
-      <p>create at{event.createdAt}</p>
       <p>players number {event.Players.length}</p>
       <div className="players">
         players :
         {event.Players.map((player: User) => {
           return (
-            <div className="player" key={player.id}>
+            <div className="player" key={player._id}>
               <p>{player.fullName}</p>
+              <p>{hasBall(player._id) ? 'bring ball' : ''}</p>
               <p>positon : {player.position}</p>,
             </div>
           );
@@ -74,6 +116,9 @@ function EventPage({ event }: { event: Event }) {
       </button>
       <button type="button" onClick={() => navigate('/HomePage')}>
         to home page
+      </button>
+      <button type="button" onClick={bringBall}>
+        bring ball
       </button>
     </div>
   );

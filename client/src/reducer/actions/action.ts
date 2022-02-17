@@ -12,6 +12,7 @@ export const setEvents = (events: any) => {
       location: event.location,
       _id: event._id,
       adress: event.adress,
+      balls: event.balls,
     });
   }
   return { type: 'SET_EVENTS', payload: eventArr };

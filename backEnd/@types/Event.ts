@@ -6,4 +6,5 @@ export interface Event {
   creator: string;
   img: string;
   adress: string;
+  balls: string[];
 }

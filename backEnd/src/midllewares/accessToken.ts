@@ -7,7 +7,6 @@ function tokenExtractor(req: Request, res: Response, next: NextFunction) {
     next();
   } else {
     const authorization = req.headers['authorization'];
-    console.log(authorization);
     if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
       try {
         req.body.user = jwt.verify(

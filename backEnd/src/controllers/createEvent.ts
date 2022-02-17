@@ -19,6 +19,7 @@ exports.createEvent = (req: Request, res: Response, next: NextFunction) => {
       creator: user.fullName,
       img: imgSrc,
       adress,
+      balls: [],
     });
     event.save();
     res.send(event);
@@ -33,13 +34,43 @@ exports.getAllEvents = async (
   next: NextFunction
 ) => {
   try {
-    const events = await Event.find().populate({
-      path: 'Players',
-      model: 'User',
-      select: { fullName: 1, email: 1, position: 1 },
-    });
+    const events = await Event.find()
+      .populate({
+        path: 'Players',
+        model: 'User',
+        select: { fullName: 1, email: 1, position: 1 },
+      })
+      .populate({
+        path: 'balls',
+        model: 'User',
+        select: { fullName: 1 },
+      });
     res.send(events);
   } catch (error) {
     next(error);
+  }
+};
+
+exports.ball = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    console.log('here');
+    const { eventId } = req.body;
+    const { user } = req.body;
+    const event: any = await Event.findById(eventId);
+    const balls = event.balls;
+    if (balls.includes(user.id)) {
+      var ballIndex = balls.indexOf(user.id);
+      balls.splice(ballIndex, 1);
+      event.balls = balls;
+      await event.save();
+      res.status(200).send(event);
+    } else {
+      balls.push(user.id);
+      event.balls = balls;
+      await event.save();
+      res.status(200).send(event);
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
