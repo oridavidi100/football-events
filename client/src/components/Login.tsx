@@ -22,7 +22,6 @@ function Login() {
       axios
         .post('http://localhost:5000/login', {}, config)
         .then(res => {
-          console.log(res.data);
           dispatch(setUser(res.data));
           navigate('/HomePage');
         })
@@ -40,7 +39,7 @@ function Login() {
         email: email.current.value,
         password: password.current.value,
       });
-      console.log(res.data);
+
       dispatch(setUser(res.data.body));
       document.cookie =
         'accessToken' + '=' + res.data.accessToken + ';expires=' + '120';

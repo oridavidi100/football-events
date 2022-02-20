@@ -26,10 +26,8 @@ function HomePage({
 
   const handleChange = () => {
     const searchI = search.current.value.toLocaleLowerCase();
-    console.log(searchI);
     setEventShown(
       events.filter((event: Event) => {
-        console.log(event.location.toLocaleLowerCase());
         return event.location.toLocaleLowerCase().includes(searchI);
       })
     );

@@ -17,7 +17,6 @@ function ForgetPassword() {
           newPassword: password.current.value,
         }
       );
-      console.log(res.data);
       navigate('/');
     } catch (err: any) {
       console.log(err.response.data.error);
