@@ -16,7 +16,6 @@ exports.login = async (req: Request, res: Response, next: NextFunction) => {
     const body: Body | any = {};
     const { password, email } = req.body;
     const usersArr = await User.find({ email: email });
-    console.log(email, password);
     for (let user of usersArr) {
       let ans = await bcrypt.compare(password, user.password);
       if (ans === true) {

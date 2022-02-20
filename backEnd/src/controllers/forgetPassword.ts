@@ -18,7 +18,6 @@ exports.forgetPassword = async (
         const newPasswordHash = await bcrypt.hash(newPassword, salt);
         user.password = newPasswordHash;
         await user.save();
-        console.log(user);
         return res
           .status(200)
           .send({ message: 'password changed', username: user.fullName });

@@ -2,7 +2,11 @@ import { Event } from '../models/Event';
 import { NextFunction, Request, Response } from 'express';
 import { User } from '../models/User';
 import { nanoid } from 'nanoid';
-exports.createEvent = (req: Request, res: Response, next: NextFunction) => {
+exports.createEvent = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { location, date, imgSrc, adress } = req.body;
     if (!location || !date) {
@@ -22,6 +26,9 @@ exports.createEvent = (req: Request, res: Response, next: NextFunction) => {
       balls: [],
     });
     event.save();
+    await Event.findOneAndRemove({
+      date: { $lt: new Date() },
+    });
     res.send(event);
   } catch (error) {
     next(error);
@@ -53,7 +60,6 @@ exports.getAllEvents = async (
 
 exports.ball = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('here');
     const { eventId } = req.body;
     const { user } = req.body;
     const event: any = await Event.findById(eventId);
@@ -74,3 +80,20 @@ exports.ball = async (req: Request, res: Response, next: NextFunction) => {
     console.log(err);
   }
 };
+
+// exports.findByDate = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     // console.log("userlist");{modificationDate: {$lt: cutoff}}
+//     const eventList = await Event.findOneAndRemove({
+//       date: { $lt: new Date() },
+//     });
+//     res.status(200).send(eventList);
+//     // this is what i assume you meant
+//   } catch (error) {
+//     next(error);
+//   }
+// };
