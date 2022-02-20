@@ -52,3 +52,37 @@ li {
 li.active {
   color: #15cdfc;
 }
+
+/* eventpage */
+.players {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.ballButton {
+}
+.player {
+  display: flex;
+  justify-content: flex-start;
+}
+.player p {
+  padding: 0px 6px;
+  margin: 0.3rem;
+}
+.eventpage {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: left;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.eventPageImg {
+  width: 350px;
+  height: 240px;
+  object-fit: cover;
+}
+.eventPageImgDiv {
+  float: right;
+}
