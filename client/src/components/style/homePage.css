@@ -1,10 +1,13 @@
-body {
+/* body {
   text-align: center;
-}
+} */
 
+/* home page  */
 .eventsList {
+  /* text-align: center; */
+  display: flex;
   align-items: center;
-  text-align: center;
+  flex-direction: column;
 }
 .createEventHide {
   display: none;
@@ -13,16 +16,22 @@ body {
   display: block;
 }
 .event {
-  border: 1px solid #f00;
+  padding: 23.5px;
   /* Set Border For Only Specific Side */
-  border-left: 1px solid #00f;
-  border-right: 1px solid #00f;
-  border-top: 1px solid #00f;
-  border-bottom: 1px solid #00f;
+  /* border-left: 1px solid;
+  border-right: 1px solid;
+  border-top: 1px solid;
+  border-bottom: 1px solid; */
   /* Another Rules Can Be Applied*/
-  border-top-style: solid dashed dotted;
-  border-top-width: 2px;
+  /* border-top-style: solid dashed dotted;
+  border-top-width: 2px; */
 }
+.event p {
+  font-size: 18px;
+  margin: 6.5px;
+}
+
+/* navbar  */
 
 ul {
   display: block;

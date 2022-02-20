@@ -1,7 +1,6 @@
 import { Event, User } from '../../@types';
 export const setEvents = (events: any) => {
   const eventArr: Event[] = [];
-  console.log(events);
   for (let event of events) {
     eventArr.push({
       Players: event.Players,
