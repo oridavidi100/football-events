@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { setUser } from '../reducer/actions/action';
 import axios from 'axios';
 import { getCookie } from '../service/servicesfunc';
@@ -18,7 +18,6 @@ function Navbar() {
   const [formclass, setFormclass] = useState<string>('createEventHide');
 
   const logout = () => {
-    console.log('logout');
     document.cookie =
       'accessToken' + '=' + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
     dispatch(setUser(''));
@@ -36,6 +35,10 @@ function Navbar() {
     e.preventDefault();
     try {
       const dateAndTime = date.current.value + ' ' + time.current.value;
+      if (imgSrc.current.value === '') {
+        imgSrc.current.value =
+          'https://mumonarchs.com/images/2021/3/1/facilities_SOC_Duggins_aerial_lighted_DJI_0237_edited.jpg?width=600&height=360&mode=crop';
+      }
       const config = {
         headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
       };
@@ -62,7 +65,6 @@ function Navbar() {
       date.current.value = '';
       imgSrc.current.value = '';
       adress.current.value = '';
-      console.log(res.data);
     } catch (err: any) {
       console.log(err.response.data.error);
     }

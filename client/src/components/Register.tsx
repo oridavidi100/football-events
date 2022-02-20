@@ -21,7 +21,6 @@ function Register() {
         nameOfPet: nameOfPet.current.value,
         fullName: fullName.current.value,
       });
-      console.log(res.data);
       navigate('/');
     } catch (err: any) {
       setError(err.response.data.error);
