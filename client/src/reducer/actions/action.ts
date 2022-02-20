@@ -25,3 +25,7 @@ export const setUser = (user: User | string) => {
 export const setButton = (button: string) => {
   return { type: 'SET_BUTTON', payload: button };
 };
+
+export const changePos = (position: string) => {
+  return { type: 'CHANGE_POS', payload: position };
+};

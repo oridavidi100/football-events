@@ -24,6 +24,11 @@ const rootreducer = (state = initalState, action: Action) => {
       return { ...state, user: action.payload };
     case 'SET_BUTTON':
       return { ...state, button: action.payload };
+    case 'CHANGE_POS': {
+      const user = state.user as User;
+      user.position = action.payload;
+      return { ...state, user: user };
+    }
     default:
       return state;
   }

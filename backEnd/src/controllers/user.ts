@@ -17,3 +17,20 @@ exports.getUser = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
+
+exports.changePosition = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email, newPosition } = req.body;
+    const user = await User.findOneAndUpdate(
+      { email: email },
+      { position: newPosition }
+    );
+    return res.send(user);
+  } catch (err) {
+    console.log(err);
+  }
+};

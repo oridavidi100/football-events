@@ -3,7 +3,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { setEvents } from '../reducer/actions/action';
 import { Event } from '../@types';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from 'react-router-dom';
 import NotFound from './NotFound';
 import Login from './Login';
 import HomePage from './HomePage';
@@ -14,6 +19,7 @@ import EventPage from './EventPage';
 import ProfilePage from './ProfilePage';
 import Navbar from './Navbar';
 function App() {
+  const user = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
   const button = useSelector((state: any) => state.button);
   const events = useSelector((state: any) => state.events);
@@ -23,6 +29,7 @@ function App() {
       setEventShown(events);
     }
   }, [events]);
+
   useEffect(() => {
     axios
       .get('http://localhost:5000/getAllEvents')

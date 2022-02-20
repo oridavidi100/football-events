@@ -13,23 +13,22 @@ function EventPage({ event }: { event: Event }) {
   const button = useSelector((state: any) => state.button);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [date, setDate] = useState(moment(event.date).format('DD/MM/YYYY'));
+  const [time, setTime] = useState(moment(event.date).format('HH:mm'));
   useEffect((): any => {
     if (!document.cookie) {
       navigate('/');
     }
     for (let player of event.Players) {
-      console.log(player._id);
       if (player._id === user.id) {
-        console.log('ues');
         return dispatch(setButton('remove'));
       }
     }
+    console.log(time, date);
     return dispatch(setButton('join'));
   }, []);
 
   const hasBall = (id: string) => {
-    console.log(id);
     for (let player of event.balls) {
       if (player._id === id) {
         return true;
@@ -50,7 +49,6 @@ function EventPage({ event }: { event: Event }) {
         },
         config
       );
-      console.log(res.data.button);
       dispatch(setButton(res.data.button));
     } catch (err: any) {
       console.log(err.response.data.error);
@@ -69,7 +67,6 @@ function EventPage({ event }: { event: Event }) {
         },
         config
       );
-      console.log(res.data);
       axios
         .get('http://localhost:5000/getAllEvents')
         .then(res => {
@@ -82,41 +79,43 @@ function EventPage({ event }: { event: Event }) {
       console.log(err.response.data.error);
     }
   };
-  if (event) {
-    console.log(event);
-  }
 
   return (
     <div className="eventpage">
-      <p> location: {event.location}</p>
-      <address>
+      <div className="eventPageImgDiv">
+        <img src={event.img} alt="event" className="eventPageImg" />
+      </div>
+      <p className="location"> location: {event.location}</p>
+      <address className="adress">
         adress:
         <a href={`https://maps.google.com/?q=${event.adress}`}>
           {event.adress}
         </a>
       </address>
-      <p> date :{moment(event.date).format('MMMM Do YYYY, h:mm:ss a')}</p>
-      <p>{moment(event.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p>
-      <p> creator :{event.creator}</p>
-      <p>players number {event.Players.length}</p>
+      <p className="date">date :{date}</p>
+      <p className="time">time :{time}</p>
+      {/* <p> create at{moment(event.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p> */}
+      <p className="creator"> create by :{event.creator}</p>
+      <p>players {event.Players.length}:</p>
       <div className="players">
-        players :
         {event.Players.map((player: User) => {
           return (
             <div className="player" key={player._id}>
               <p>{player.fullName}</p>
-              <p>{hasBall(player._id) ? 'bring ball' : ''}</p>
-              <p>positon : {player.position}</p>,
+              <p>positon : {player.position}</p>
+              <p>{hasBall(player._id) ? '⚽' : ''}</p>
             </div>
           );
         })}
       </div>
-      <button type="button" onClick={handleClick}>
-        {button}
-      </button>
-      <button type="button" onClick={bringBall}>
-        bring ball
-      </button>
+      <div className="buttons">
+        <button type="button" onClick={bringBall} className="ballButton">
+          ⚽
+        </button>
+        <button type="button" onClick={handleClick}>
+          {button}
+        </button>
+      </div>
     </div>
   );
 }
