@@ -14,6 +14,12 @@ export const setEvents = (events: any) => {
       balls: event.balls,
     });
   }
+  eventArr.sort((a: any, b: any) => {
+    const dateA: any = new Date(a.date),
+      dateB: any = new Date(b.date);
+    return dateA - dateB;
+  });
+  console.log(eventArr);
   return { type: 'SET_EVENTS', payload: eventArr };
 };
 

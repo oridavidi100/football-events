@@ -65,6 +65,7 @@ function Navbar() {
       date.current.value = '';
       imgSrc.current.value = '';
       adress.current.value = '';
+      time.current.value = '';
     } catch (err: any) {
       console.log(err.response.data.error);
     }

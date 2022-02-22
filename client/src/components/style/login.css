@@ -7,11 +7,6 @@
   min-height: 100vh;
   font-family: 'Jost', sans-serif;
   background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-  /* background-image: url('https://media.istockphoto.com/illustrations/football-background-illustration-id165730100?k=20&m=165730100&s=170667a&w=0&h=jLQw4UsIi7zGoiYJ7jF0jiuWYfjvfVQBx3RJKMzOPiM=');
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover; */
   position: absolute;
   top: 0;
   left: 0;

@@ -56,7 +56,6 @@ function App() {
                 />
               );
             })}
-
           {/* <Route path="/:word/:partOfSpeech" element={<WordAndPos />} /> */}
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />

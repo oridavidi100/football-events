@@ -85,28 +85,30 @@ function EventPage({ event }: { event: Event }) {
       <div className="eventPageImgDiv">
         <img src={event.img} alt="event" className="eventPageImg" />
       </div>
-      <p className="location"> location: {event.location}</p>
-      <address className="adress">
-        adress:
-        <a href={`https://maps.google.com/?q=${event.adress}`}>
-          {event.adress}
-        </a>
-      </address>
-      <p className="date">date :{date}</p>
-      <p className="time">time :{time}</p>
-      {/* <p> create at{moment(event.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p> */}
-      <p className="creator"> create by :{event.creator}</p>
-      <p>players {event.Players.length}:</p>
-      <div className="players">
-        {event.Players.map((player: User) => {
-          return (
-            <div className="player" key={player._id}>
-              <p>{player.fullName}</p>
-              <p>positon : {player.position}</p>
-              <p>{hasBall(player._id) ? '⚽' : ''}</p>
-            </div>
-          );
-        })}
+      <div className="info ">
+        <p className="location"> location: {event.location}</p>
+        <address className="adress">
+          adress:
+          <a href={`https://maps.google.com/?q=${event.adress}`}>
+            {event.adress}
+          </a>
+        </address>
+        <p className="date">date :{date}</p>
+        <p className="time">time :{time}</p>
+        {/* <p> create at{moment(event.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p> */}
+        <p className="creator"> create by :{event.creator}</p>
+        <p>players ({event.Players.length}):</p>
+        <div className="players">
+          {event.Players.map((player: User) => {
+            return (
+              <div className="player" key={player._id}>
+                <p>{player.fullName}</p>
+                <p>positon : {player.position}</p>
+                <p>{hasBall(player._id) ? '⚽' : ''}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="buttons">
         <button type="button" onClick={bringBall} className="ballButton">
@@ -116,6 +118,7 @@ function EventPage({ event }: { event: Event }) {
           {button}
         </button>
       </div>
+      {/* <div className="footer"></div> */}
     </div>
   );
 }

@@ -9,7 +9,9 @@ function ProfilePage() {
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.user);
   const newPos = useRef<string | any>('');
-
+  useEffect((): any => {
+    newPos.current.value = user.position;
+  }, []);
   useEffect(() => {
     if (!document.cookie || !user) {
       navigate('/');
@@ -25,26 +27,25 @@ function ProfilePage() {
           email: user.email,
         }
       );
+      console.log(newPos.current.value);
       dispatch(changePos(newPos.current.value));
-      newPos.current.value = '';
       console.log(user);
     } catch (err: any) {
       console.log(err.response.data.error);
     }
   };
   return (
-    <div>
-      ProfilePage
+    <div className="profile">
       {user && (
-        <div>
-          <p>{user.fullName}</p>
-          <p>{user.email}</p>
-          <p>{user.position}</p>
+        <div className="details">
+          <p> name : {user.fullName}</p>
+          <p> email : {user.email}</p>
+          <p> position :{/* {user.position} */}</p>
           <input
             ref={newPos}
             type="text"
             required={true}
-            placeholder="new position "
+            placeholder="new position"
           />
           <button type="button" onClick={changePosition}>
             change position

@@ -39,22 +39,24 @@ function HomePage({
         hello {user.fullName}
         {''} wellcome to the home page of the best football events over the
         countery
+        <div className="searchBar">
+          <p>search event by city </p>
+          <input type="text" onChange={handleChange} ref={search}></input>
+        </div>
       </div>
-
-      <p>search event by city </p>
-      <input type="text" onChange={handleChange} ref={search}></input>
 
       <div className="eventsList">
         {eventShown &&
           eventShown.map((event: Event) => {
             return (
               <div className="event" key={event._id}>
-                <p> location: {event.location}</p>
+                <p className="locationF"> {event.location}</p>
+                <p>{moment(event.date).format('dddd')}</p>
                 <p>
-                  {' '}
-                  date :{moment(event.date).format('MMMM Do YYYY, h:mm:ss a')}
+                  {moment(event.date).format('MMMM Do YYYY')} ,
+                  {moment(event.date).format('HH:MM')}
                 </p>
-                <Link to={`/${event._id}`}>more details</Link>
+                {/* <p>{moment(event.date).format('h:mm a')}</p> */}
 
                 <img
                   src={event.img}
@@ -62,6 +64,10 @@ function HomePage({
                   width={100}
                   height={100}
                 />
+                <br />
+                <Link className="linkToDetails" to={`/${event._id}`}>
+                  more details
+                </Link>
               </div>
             );
           })}
