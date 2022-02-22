@@ -93,7 +93,7 @@ exports.deleteEvent = async (
     console.log(user, eventId);
     const event = await Event.findById(eventId);
     if (event && event.creator.fullName === user.fullName) {
-      if (event.Players.length === 0 || event.Players[0] === user.id) {
+      if (event.Players.length === 0) {
         event.remove();
         res.status(200).send(event);
       } else {

@@ -102,7 +102,7 @@ function EventPage({ event }: { event: Event }) {
       console.log(err.response.data.error);
     }
   };
-
+  console.log(event);
   return (
     <div className="eventpage">
       <div className="eventPageImgDiv">
@@ -119,7 +119,7 @@ function EventPage({ event }: { event: Event }) {
         <p className="date">date :{date}</p>
         <p className="time">time :{time}</p>
         {/* <p> create at{moment(event.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p> */}
-        <p className="creator"> create by :{event.creator}</p>
+        <p className="creator"> create by :{event.creator.fullName}</p>
         <p>players ({event.Players.length}):</p>
         <div className="players">
           {event.Players.map((player: User) => {

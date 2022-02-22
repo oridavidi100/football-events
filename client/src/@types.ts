@@ -8,11 +8,16 @@ export interface User {
 export interface Event {
   Players: User[] | any;
   createdAt: string;
-  creator: string;
+  creator: Creator;
   date: string;
   img: string;
   location: string;
   _id: string;
   adress: string;
   balls: User[] | any;
+}
+
+interface Creator {
+  fullName: string;
+  id: string;
 }
