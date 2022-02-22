@@ -18,6 +18,16 @@ const io = new Server(httpServer, {
 
 io.on('connection', socket => {
   console.log('connect');
+
+  socket.on('message', ({ name, message }) => {
+    console.log(name, message);
+    console.log(socket.id);
+    io.emit('messageBack', { name, message });
+  });
+
+  socket.on('disconnect', () => {
+    io.emit('messageBack', { name: 'wow', message: 'render' });
+  });
 });
 
 if (MONGO_URL) {

@@ -3,12 +3,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { setEvents } from '../reducer/actions/action';
 import { Event } from '../@types';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from 'react-router-dom';
+import moment from 'moment';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NotFound from './NotFound';
 import Login from './Login';
 import HomePage from './HomePage';
@@ -18,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import EventPage from './EventPage';
 import ProfilePage from './ProfilePage';
 import Navbar from './Navbar';
+import Chat from './Chat';
 function App() {
   const user = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
@@ -42,6 +39,7 @@ function App() {
     setEventShown(events);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [button]);
+
   return (
     <Router>
       <Navbar />
@@ -49,14 +47,18 @@ function App() {
         <Routes>
           {events &&
             events.map((event: Event) => {
+              console.log(event.location);
               return (
                 <Route
-                  path={event._id}
+                  path={`${event.location.replaceAll(' ', '-')}/${moment(
+                    event.date
+                  ).format('dddd')}`}
                   element={<EventPage event={event} key={event._id} />}
                 />
               );
             })}
           {/* <Route path="/:word/:partOfSpeech" element={<WordAndPos />} /> */}
+          <Route path="/chat" element={<Chat />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/register" element={<Register />} />

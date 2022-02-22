@@ -79,13 +79,21 @@ function HomePage({
                   height={100}
                 />
                 <br />
-                <Link className="linkToDetails" to={`/${event._id}`}>
+                <Link
+                  className="linkToDetails"
+                  to={`/${event.location.replaceAll(' ', '-')}/${moment(
+                    event.date
+                  ).format('dddd')}`}
+                >
                   more details
                 </Link>
               </div>
             );
           })}
       </div>
+      <button>
+        <Link to="/chat">chat</Link>
+      </button>
     </div>
   );
 }
