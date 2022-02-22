@@ -19,7 +19,6 @@ export const setEvents = (events: any) => {
       dateB: any = new Date(b.date);
     return dateA - dateB;
   });
-  console.log(eventArr);
   return { type: 'SET_EVENTS', payload: eventArr };
 };
 

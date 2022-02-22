@@ -15,6 +15,7 @@ function EventPage({ event }: { event: Event }) {
   const navigate = useNavigate();
   const [date, setDate] = useState(moment(event.date).format('DD/MM/YYYY'));
   const [time, setTime] = useState(moment(event.date).format('HH:mm'));
+  const [error, setError] = useState<string | any>('');
   useEffect((): any => {
     if (!document.cookie) {
       navigate('/');
@@ -44,10 +45,9 @@ function EventPage({ event }: { event: Event }) {
           },
         }
       );
-      console.log(res);
       navigate('/');
     } catch (err: any) {
-      console.log(err.response.data.error);
+      setError(err.response.data.error);
     }
   };
 
@@ -74,7 +74,7 @@ function EventPage({ event }: { event: Event }) {
       );
       dispatch(setButton(res.data.button));
     } catch (err: any) {
-      console.log(err.response.data.error);
+      setError(err.response.data.error);
     }
   };
 
@@ -102,7 +102,7 @@ function EventPage({ event }: { event: Event }) {
       console.log(err.response.data.error);
     }
   };
-  console.log(event);
+
   return (
     <div className="eventpage">
       <div className="eventPageImgDiv">
@@ -142,6 +142,7 @@ function EventPage({ event }: { event: Event }) {
         </button>
       </div>
       <button onClick={deleteEvent}>X</button>
+      <div className="errorMessage">{error}</div>
     </div>
   );
 }

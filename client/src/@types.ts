@@ -21,3 +21,19 @@ interface Creator {
   fullName: string;
   id: string;
 }
+
+export interface ServerToClientEvents {
+  messageBack: ({ name, message }: { name: string; message: string }) => void;
+}
+
+export interface ClientToServerEvents {
+  message: ({
+    name,
+    message,
+    room,
+  }: {
+    name: string;
+    message: string;
+    room: string;
+  }) => void;
+}

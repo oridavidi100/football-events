@@ -27,9 +27,7 @@ function ProfilePage() {
           email: user.email,
         }
       );
-      console.log(newPos.current.value);
       dispatch(changePos(newPos.current.value));
-      console.log(user);
     } catch (err: any) {
       console.log(err.response.data.error);
     }

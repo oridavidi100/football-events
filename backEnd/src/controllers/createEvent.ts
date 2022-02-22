@@ -2,6 +2,7 @@ import { Event } from '../models/Event';
 import { NextFunction, Request, Response } from 'express';
 import { User } from '../models/User';
 import { nanoid } from 'nanoid';
+
 exports.createEvent = async (
   req: Request,
   res: Response,
@@ -90,7 +91,6 @@ exports.deleteEvent = async (
   try {
     const { eventId } = req.body;
     const { user } = req.body;
-    console.log(user, eventId);
     const event = await Event.findById(eventId);
     if (event && event.creator.fullName === user.fullName) {
       if (event.Players.length === 0) {
