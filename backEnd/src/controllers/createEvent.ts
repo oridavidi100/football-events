@@ -31,6 +31,7 @@ exports.createEvent = async (
     });
     res.send(event);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
@@ -89,7 +90,7 @@ exports.deleteEvent = async (
   try {
     const { eventId } = req.body;
     const { user } = req.body;
-
+    console.log(user, eventId);
     const event = await Event.findById(eventId);
     if (event && event.creator.fullName === user.fullName) {
       if (event.Players.length === 0 || event.Players[0] === user.id) {

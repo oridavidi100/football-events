@@ -19,7 +19,7 @@ const EventSchema = new mongoose.Schema<Event>(
       required: true,
     },
     creator: {
-      type: String,
+      type: Object,
       required: true,
     },
     img: {

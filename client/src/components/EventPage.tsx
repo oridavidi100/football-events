@@ -28,6 +28,29 @@ function EventPage({ event }: { event: Event }) {
     return dispatch(setButton('join'));
   }, []);
 
+  const deleteEvent = async () => {
+    const config = {
+      headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
+    };
+    try {
+      const res = await axios.delete(
+        'http://localhost:5000/Event/deleteEvent',
+        {
+          headers: {
+            Authorization: `Bearer ${getCookie('accessToken')}`,
+          },
+          data: {
+            eventId: event._id,
+          },
+        }
+      );
+      console.log(res);
+      navigate('/');
+    } catch (err: any) {
+      console.log(err.response.data.error);
+    }
+  };
+
   const hasBall = (id: string) => {
     for (let player of event.balls) {
       if (player._id === id) {
@@ -118,9 +141,17 @@ function EventPage({ event }: { event: Event }) {
           {button}
         </button>
       </div>
-      {/* <div className="footer"></div> */}
+      <button onClick={deleteEvent}>X</button>
     </div>
   );
 }
 
 export default EventPage;
+function body(
+  arg0: string,
+  config: { headers: { Authorization: string } },
+  body: any,
+  arg3: { eventId: string }
+) {
+  throw new Error('Function not implemented.');
+}

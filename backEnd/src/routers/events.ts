@@ -4,7 +4,7 @@ const { addplayersToEvent } = require('../controllers/addPlayersToEvent');
 const { ball } = require('../controllers/createEvent');
 const { deleteEvent } = require('../controllers/createEvent');
 const router = express.Router();
-router.delete('deleteEvent', deleteEvent);
+router.delete('/deleteEvent', deleteEvent);
 router.post('/giveBall', ball);
 router.post('/create', createEvent);
 router.post('/addPlayer', addplayersToEvent);

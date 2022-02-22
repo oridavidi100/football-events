@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
 import { Event } from '../@types';
 import { Link, useNavigate } from 'react-router-dom';
 import './style/homePage.css';
-
+import { setEvents } from '../reducer/actions/action';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import moment from 'moment';
 
 function HomePage({
@@ -13,10 +14,23 @@ function HomePage({
   eventShown: Event[];
   setEventShown: React.Dispatch<React.SetStateAction<Event[]>>;
 }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const search = useRef<string | any>('');
   let events = useSelector((state: any) => state.events);
   const user = useSelector((state: any) => state.user);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/getAllEvents')
+      .then(res => {
+        dispatch(setEvents(res.data));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    setEventShown(events);
+  }, []);
 
   useEffect(() => {
     if (!document.cookie || !user) {
