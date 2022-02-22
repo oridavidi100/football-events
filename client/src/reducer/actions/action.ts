@@ -5,7 +5,7 @@ export const setEvents = (events: any) => {
     eventArr.push({
       Players: event.Players,
       createdAt: event.createdAt,
-      creator: event.creator,
+      creator: event.creator.fullName,
       date: event.date,
       img: event.img,
       location: event.location,

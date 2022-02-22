@@ -3,8 +3,12 @@ export interface Event {
   location: string;
   Players: string[];
   date: Date;
-  creator: string;
+  creator: Creator;
   img: string;
   adress: string;
   balls: string[];
+}
+interface Creator {
+  fullName: string;
+  id: string;
 }

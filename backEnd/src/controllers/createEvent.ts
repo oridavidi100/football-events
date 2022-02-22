@@ -20,7 +20,7 @@ exports.createEvent = async (
       location,
       Players: players,
       date,
-      creator: user.fullName,
+      creator: { fullName: user.fullName, id: user.id },
       img: imgSrc,
       adress,
       balls: [],
@@ -81,19 +81,27 @@ exports.ball = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// exports.findByDate = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     // console.log("userlist");{modificationDate: {$lt: cutoff}}
-//     const eventList = await Event.findOneAndRemove({
-//       date: { $lt: new Date() },
-//     });
-//     res.status(200).send(eventList);
-//     // this is what i assume you meant
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+exports.deleteEvent = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { eventId } = req.body;
+    const { user } = req.body;
+
+    const event = await Event.findById(eventId);
+    if (event && event.creator.fullName === user.fullName) {
+      if (event.Players.length === 0 || event.Players[0] === user.id) {
+        event.remove();
+        res.status(200).send(event);
+      } else {
+        throw { status: 400, message: 'there is players in the game' };
+      }
+    } else {
+      throw { status: 400, message: 'you are not the creator of this event' };
+    }
+  } catch (error) {
+    next(error);
+  }
+};
