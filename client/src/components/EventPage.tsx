@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Event, User } from '../@types';
 import { useSelector, useDispatch } from 'react-redux';
 import { setButton } from '../reducer/actions/action';
 import { getCookie } from '../service/servicesfunc';
 import moment from 'moment';
 import { setEvents } from '../reducer/actions/action';
+import Chat from './Chat';
 
 function EventPage({ event }: { event: Event }) {
   const user = useSelector((state: any) => state.user);
@@ -48,6 +49,9 @@ function EventPage({ event }: { event: Event }) {
       navigate('/');
     } catch (err: any) {
       setError(err.response.data.error);
+      setTimeout(function () {
+        setError('');
+      }, 4500);
     }
   };
 
@@ -132,27 +136,20 @@ function EventPage({ event }: { event: Event }) {
             );
           })}
         </div>
+        <div className="buttons">
+          <button type="button" onClick={bringBall} className="ballButton">
+            ⚽
+          </button>
+          <button type="button" onClick={handleClick}>
+            {button}
+          </button>
+          <button onClick={deleteEvent}>Delete Event</button>
+        </div>
       </div>
-      <div className="buttons">
-        <button type="button" onClick={bringBall} className="ballButton">
-          ⚽
-        </button>
-        <button type="button" onClick={handleClick}>
-          {button}
-        </button>
-      </div>
-      <button onClick={deleteEvent}>X</button>
       <div className="errorMessage">{error}</div>
+      <Chat eventId={event._id} />
     </div>
   );
 }
 
 export default EventPage;
-function body(
-  arg0: string,
-  config: { headers: { Authorization: string } },
-  body: any,
-  arg3: { eventId: string }
-) {
-  throw new Error('Function not implemented.');
-}

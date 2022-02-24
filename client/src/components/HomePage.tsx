@@ -91,9 +91,6 @@ function HomePage({
             );
           })}
       </div>
-      <button>
-        <Link to="/chat">chat</Link>
-      </button>
     </div>
   );
 }

@@ -47,7 +47,6 @@ function App() {
         <Routes>
           {events &&
             events.map((event: Event) => {
-              console.log(event.location);
               return (
                 <Route
                   path={`${event.location.replaceAll(' ', '-')}/${moment(
@@ -58,7 +57,7 @@ function App() {
               );
             })}
           {/* <Route path="/:word/:partOfSpeech" element={<WordAndPos />} /> */}
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/chat" element={<Chat eventId="" />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/register" element={<Register />} />

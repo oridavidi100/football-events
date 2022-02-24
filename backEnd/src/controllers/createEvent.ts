@@ -2,6 +2,7 @@ import { Event } from '../models/Event';
 import { NextFunction, Request, Response } from 'express';
 import { User } from '../models/User';
 import { nanoid } from 'nanoid';
+import { Message } from '../models/Messages';
 
 exports.createEvent = async (
   req: Request,
@@ -16,7 +17,7 @@ exports.createEvent = async (
     const user = req.body.user;
     const players = [];
     players.push(user.id);
-    const event = new Event({
+    const event = await Event.create({
       _id: nanoid(),
       location,
       Players: players,
@@ -26,8 +27,7 @@ exports.createEvent = async (
       adress,
       balls: [],
     });
-    event.save();
-    await Event.findOneAndRemove({
+    await Event.remove({
       date: { $lt: new Date() },
     });
     res.send(event);
@@ -95,6 +95,7 @@ exports.deleteEvent = async (
     if (event && event.creator.fullName === user.fullName) {
       if (event.Players.length === 0) {
         event.remove();
+        await Message.remove({ room: eventId });
         res.status(200).send(event);
       } else {
         throw { status: 400, message: 'there is players in the game' };

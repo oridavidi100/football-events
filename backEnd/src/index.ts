@@ -9,6 +9,7 @@ import config from './config';
 const { MONGO_URL } = config;
 import { Server } from 'socket.io';
 import { createServer } from 'http';
+import { Message } from './../src/models/Messages';
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
@@ -17,16 +18,20 @@ const io = new Server(httpServer, {
 });
 
 io.on('connection', socket => {
-  console.log('connect');
-
-  socket.on('message', ({ name, message }) => {
-    console.log(name, message);
-    console.log(socket.id);
-    io.emit('messageBack', { name, message });
+  socket.on('join', ({ room }) => {
+    socket.join(room);
+  });
+  socket.on('message', async ({ name, message, room }) => {
+    await Message.create({
+      name,
+      message,
+      room,
+    });
+    io.in(room).emit('messageBack', { name, message });
   });
 
   socket.on('disconnect', () => {
-    io.emit('messageBack', { name: 'wow', message: 'render' });
+    io.emit('messageBack', { name: 'server', message: 'user disconnected' });
   });
 });
 
