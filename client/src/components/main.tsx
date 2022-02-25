@@ -42,8 +42,8 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
       <div className="App">
+        <Navbar />
         <Routes>
           {events &&
             events.map((event: Event) => {
