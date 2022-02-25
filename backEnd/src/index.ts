@@ -31,7 +31,7 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', () => {
-    io.emit('messageBack', { name: 'server', message: 'user disconnected' });
+    // io.emit('messageBack', { name: 'server', message: 'user disconnected' });
   });
 });
 
