@@ -50,7 +50,7 @@ function HomePage({
   return (
     <div className="homePage">
       <div className="homePage__header">
-        hello {user.fullName}
+        Hello {user.fullName}
         {''} wellcome to the home page of the best football events over the
         countery
         <div className="searchBar">

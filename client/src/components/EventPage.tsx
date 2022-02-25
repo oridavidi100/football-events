@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { Event, User } from '../@types';
@@ -8,6 +8,9 @@ import { getCookie } from '../service/servicesfunc';
 import moment from 'moment';
 import { setEvents } from '../reducer/actions/action';
 import Chat from './Chat';
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
+const notyf = new Notyf();
 
 function EventPage({ event }: { event: Event }) {
   const user = useSelector((state: any) => state.user);
@@ -16,7 +19,7 @@ function EventPage({ event }: { event: Event }) {
   const navigate = useNavigate();
   const [date, setDate] = useState(moment(event.date).format('DD/MM/YYYY'));
   const [time, setTime] = useState(moment(event.date).format('HH:mm'));
-  const [error, setError] = useState<string | any>('');
+  // const [error, setError] = useState<string | any>('');
   useEffect((): any => {
     if (!document.cookie) {
       navigate('/');
@@ -48,10 +51,10 @@ function EventPage({ event }: { event: Event }) {
       );
       navigate('/');
     } catch (err: any) {
-      setError(err.response.data.error);
-      setTimeout(function () {
-        setError('');
-      }, 4500);
+      notyf.error(err.response.data.error);
+      //   setTimeout(function () {
+      //     setError('');
+      //   }, 4500);
     }
   };
 
@@ -78,7 +81,7 @@ function EventPage({ event }: { event: Event }) {
       );
       dispatch(setButton(res.data.button));
     } catch (err: any) {
-      setError(err.response.data.error);
+      notyf.error(err.response.data.error);
     }
   };
 
@@ -109,8 +112,8 @@ function EventPage({ event }: { event: Event }) {
 
   return (
     <div className="eventpage">
-      <div className="eventPageImgDiv">
-        <img src={event.img} alt="event" className="eventPageImg" />
+      <div className="ChatDiv">
+        <Chat eventId={event._id} />
       </div>
       <div className="info ">
         <p className="location"> location: {event.location}</p>
@@ -145,9 +148,11 @@ function EventPage({ event }: { event: Event }) {
           </button>
           <button onClick={deleteEvent}>Delete Event</button>
         </div>
+        <div className="eventPageImgDiv">
+          <img src={event.img} alt="event" className="eventPageImg" />
+        </div>
       </div>
-      <div className="errorMessage">{error}</div>
-      <Chat eventId={event._id} />
+      {/* <div className="errorMessage">{error}</div> */}
     </div>
   );
 }
