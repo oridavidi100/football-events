@@ -9,7 +9,7 @@ import config from './config';
 const { MONGO_URL } = config;
 import { Server } from 'socket.io';
 import { createServer } from 'http';
-import { Message } from './../src/models/Messages';
+import { Message } from './models/Messages';
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
