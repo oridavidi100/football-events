@@ -7,9 +7,7 @@ exports.getAllMessages = async (
 ) => {
   try {
     const { room } = req.params;
-    console.log('rooooom', room);
     const messages = await Message.find({ room: room });
-    console.log('messages', messages);
     res.send(messages);
   } catch (error) {
     next(error);

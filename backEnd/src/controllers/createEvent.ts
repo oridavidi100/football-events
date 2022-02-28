@@ -32,7 +32,6 @@ exports.createEvent = async (
     });
     res.send(event);
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

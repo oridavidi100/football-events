@@ -24,6 +24,7 @@ function Register() {
       navigate('/');
     } catch (err: any) {
       setError(err.response.data.error);
+      console.log(err.response.data.error);
     }
   };
   return (

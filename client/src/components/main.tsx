@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import './App.css';
 import axios from 'axios';
 import { setEvents } from '../reducer/actions/action';
 import { Event } from '../@types';
@@ -15,6 +14,7 @@ import EventPage from './EventPage';
 import ProfilePage from './ProfilePage';
 import Navbar from './Navbar';
 import Chat from './Chat';
+
 function App() {
   const user = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
@@ -37,7 +37,6 @@ function App() {
         console.log(err);
       });
     setEventShown(events);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [button]);
 
   return (

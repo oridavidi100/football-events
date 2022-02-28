@@ -26,7 +26,7 @@ exports.register = async (req: Request, res: Response, next: NextFunction) => {
     res.status(201).send('Register Success' + user);
     next();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     next(error);
   }
 };

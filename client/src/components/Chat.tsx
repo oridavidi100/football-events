@@ -6,11 +6,11 @@ import moment from 'moment';
 function Chat({ eventId }: { eventId: string }) {
   const user = useSelector((state: any) => state.user);
   const [message, setMessage] = useState<any>([]);
-  // const [name, setName] = useState<string>(user.email);
   const socketRef = useRef<Socket>();
   const inputM = useRef<string | any>('');
-  const [myMessage, setMyMessage] = useState<string>('myClassMessage');
-  // const [classMessage, setClassMessage] = useState<string>('classMessage');
+
+  //nake the chat move to the bottom
+
   const messageEl = useRef<HTMLDivElement | null>(null);
   if (messageEl.current !== null) {
     messageEl.current.addEventListener('DOMNodeInserted', event => {
@@ -26,7 +26,6 @@ function Chat({ eventId }: { eventId: string }) {
       .get(`http://localhost:5000/allMessages/${eventId}`)
       .then(res => {
         setMessage(res.data);
-        console.log(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -40,6 +39,7 @@ function Chat({ eventId }: { eventId: string }) {
       setMessage((prev: any) => [...prev, { name, message }]);
     });
   }, []);
+
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     socketRef.current!.emit('message', {
@@ -49,11 +49,15 @@ function Chat({ eventId }: { eventId: string }) {
     });
     inputM.current.value = '';
   };
+
   return (
     <div className="chat">
       <div className="chatMessages" ref={messageEl}>
         {message.map((msg: any) => (
-          <div className={msg.name === user.email ? 'myMessage' : 'PMessage'}>
+          <div
+            className={msg.name === user.email ? 'myMessage' : 'PMessage'}
+            key={msg.id}
+          >
             <p className="messageName">{msg.name}</p>
             <p className="msgDate">
               {moment(msg.createdAt).format('DD/MM/YYYY') ===

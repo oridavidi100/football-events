@@ -16,13 +16,16 @@ body {
   z-index: -1;
 }
 .homePage__header {
-  font-size: 1.2rem;
-  text-align: left;
-  margin-top: 5em;
-  font-weight: 600px;
+  font-size: 1.3rem;
+  text-align: center;
+  text-align: center;
+  margin: 4% 15% 1% 15%;
+  font-weight: 600;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  margin-left: 5em;
+  background-color: rgba(240, 248, 255, 0.274);
+  padding: 1% 1%;
+  border-radius: 2em;
 }
 .eventsList {
   display: flex;
@@ -33,21 +36,24 @@ body {
 
 .searchBar {
   color: beige;
-  margin-left: 15.736%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .event {
   color: black;
-  margin-top: 0.9em;
+  width: 19%;
+  margin: 1%;
   border-radius: 25px;
-  padding: 52px 20px 60px;
+  padding: 3% 1%;
   box-sizing: border-box;
-  margin-right: 12px;
   text-align: center;
-  background-color: whitesmoke;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  background-color: rgba(245, 245, 245, 0.938);
+  box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px,
+    rgb(0 0 0 / 30%) 0px 30px 60px -30px,
+    rgb(10 37 64 / 35%) 0px -2px 6px 0px inset;
 }
 
 .linkToDetails {
@@ -72,7 +78,7 @@ body {
   text-transform: capitalize;
   font-weight: 600;
 }
-/* Homepage */
+/* Home page */
 
 /* navbar  */
 
@@ -136,7 +142,10 @@ li.active {
   color: #15cdfc;
 }
 
+/* navbar */
+
 /* eventpage */
+
 .errorMessage {
   color: red;
   margin-right: 99vh;
@@ -146,19 +155,25 @@ li.active {
   box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px,
     rgb(0 0 0 / 30%) 0px 30px 60px -30px,
     rgb(10 37 64 / 35%) 0px -2px 6px 0px inset;
-  padding-top: 0.5px;
-  width: 60%;
+  width: 111vh;
   display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.detailsPage {
+  /* display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 64vh;
-  overflow-y: hidden;
+  height: 65vh;
+  overflow-y: hidden; */
+  max-width: 100vw;
+  min-width: 100vh;
 }
-.info p {
-  margin-left: 1%;
+.detailsPage p {
+  margin-left: 1vh;
 }
-.info address {
-  margin-left: 1%;
+.detailsPage address {
+  margin-left: 1vh;
 }
 .players {
   display: flex;
@@ -181,7 +196,6 @@ li.active {
   /* background-image: url(../../photos/eventPage.png); */
   height: 80vh;
   width: 97vw;
-  position: absolute;
   overflow: hidden;
   display: flex;
   flex-direction: row-reverse;
@@ -196,18 +210,20 @@ li.active {
 }
 .eventPageImg {
   border-radius: 25%;
-  width: 350px;
-  height: 240px;
+  width: 315px;
+  height: 206px;
   object-fit: cover;
-  /* margin-right: 20px; */
+  margin-right: 20px;
 }
 .eventPageImgDiv {
-  margin-left: -62vh;
+  margin-left: -47vh;
+  margin-right: 1px;
 }
-/* .footer {
-  background-image: url('https://wallpaper-house.com/data/out/5/wallpaper2you_61180.jpg');
-} */
+
+/* event page */
+
 /* profile */
+
 .profile {
   background-image: url('../../photos/profile.jpg');
   background-attachment: fixed;
@@ -233,11 +249,10 @@ li.active {
   margin: 1.42022rem;
 }
 
-/* input {
-  border-radius: 25px;
-} */
+/* profile */
 
 /* Chat */
+
 .ChatDiv {
   background-image: url('https://i.pinimg.com/236x/ed/d6/84/edd6846150e2dd9690aad1494715c878.jpg');
   width: 62vh;
@@ -308,29 +323,5 @@ li.active {
 
   margin-left: 1.3vh;
 }
-input {
-  /* float: left;
-  width: 188px;
-  height: 42px;
-  padding: 0 15px;
-  border: 1px solid var(--light);
-  background-color: #eceff1;
-  border-radius: 21px;
-  @include font(); */
-}
-/* .input focus {
-  outline: none;
-} */
-.send {
-  /* 
-  position: absolute;
-  bottom: 3px;
-  right: 10px; 
-  background: transparent;
-  box-shadow: none;
-  border: none;
-  border-radius: 50%;
-  color: #5a5eb9;
-   width: 35px;
-  height: 35px; */
-}
+
+/* Chat */
