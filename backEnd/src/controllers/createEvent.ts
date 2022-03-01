@@ -17,6 +17,9 @@ exports.createEvent = async (
     const user = req.body.user;
     const players = [];
     players.push(user.id);
+    await Event.deleteMany({
+      date: { $lt: new Date() },
+    });
     const event = await Event.create({
       _id: nanoid(),
       location,
@@ -26,9 +29,6 @@ exports.createEvent = async (
       img: imgSrc,
       adress,
       balls: [],
-    });
-    await Event.remove({
-      date: { $lt: new Date() },
     });
     res.send(event);
   } catch (error) {
