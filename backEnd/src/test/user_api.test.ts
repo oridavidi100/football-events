@@ -61,42 +61,63 @@ describe('User', () => {
       expect(response.body.error).toBe('password incorrect');
     });
   });
+});
+// USER //
 
-  // USER //
+// EVENT //
+describe('events', () => {
+  let eventId = '';
+  ///
 
-  // EVENT //
-  describe('events', () => {
-    test('createEvent', async () => {
-      Event.deleteMany({});
-      const accessToken = // root accessToken
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAZ21haWwuY29tIiwiZnVsbE5hbWUiOiJyb290IHJvb3QiLCJpZCI6Ik5nVHRESWlSeXg0QzVmbXB3Vmo4ViIsInBvc2l0aW9uIjoiU1QiLCJpYXQiOjE2NDYwNjU2MjZ9.7jiVEZxlyHCKes_7Zf_pgtix-IIim3yuoomXIWf775E';
+  test('createEvent', async () => {
+    Event.deleteMany({});
+    const accessToken = // root accessToken
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAZ21haWwuY29tIiwiZnVsbE5hbWUiOiJyb290IHJvb3QiLCJpZCI6Ik5nVHRESWlSeXg0QzVmbXB3Vmo4ViIsInBvc2l0aW9uIjoiU1QiLCJpYXQiOjE2NDYwNjU2MjZ9.7jiVEZxlyHCKes_7Zf_pgtix-IIim3yuoomXIWf775E';
+    const event = await api
+      .post('/Event/create')
+      .send({
+        location: 'location',
+        date: new Date(),
+        imgSrc: 'imgSrc',
+        adress: 'adress',
+      })
+      .set('Authorization', `Bearer ${accessToken}`);
+    eventId = event.body._id;
+    const events = await Event.find({});
+    expect(event.status).toBe(200);
+    expect(event.body.location).toBe(events[0].location);
 
-      const event = await api
-        .post('/Event/create')
-        .send({
-          location: 'location',
-          date: new Date(),
-          imgSrc: 'imgSrc',
-          adress: 'adress',
-        })
-        .set('Authorization', `Bearer ${accessToken}`);
-      console.log(event.body);
-      console.log(event);
-      const events = await Event.find({});
-      console.log(events);
-      expect(event.status).toBe(200);
-      expect(event.body.location).toBe(events[0].location);
-      expect(event.body.creator.fullName).toBe(events[0].creator.fullName);
-    });
-    test('delete event', async () => {
-      const accessToken = // root accessToken
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAZ21haWwuY29tIiwiZnVsbE5hbWUiOiJyb290IHJvb3QiLCJpZCI6Ik5nVHRESWlSeXg0QzVmbXB3Vmo4ViIsInBvc2l0aW9uIjoiU1QiLCJpYXQiOjE2NDYwNjU2MjZ9.7jiVEZxlyHCKes_7Zf_pgtix-IIim3yuoomXIWf775E';
-      const event = await api
-        .post('/Event/deleteEvent')
-        .set('Authorization', `Bearer ${accessToken}`);
-    });
+    expect(event.body.creator.fullName).toBe(events[0].creator.fullName);
+  });
+
+  ////
+
+  test('remove player', async () => {
+    const accessToken = // root accessToken
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAZ21haWwuY29tIiwiZnVsbE5hbWUiOiJyb290IHJvb3QiLCJpZCI6Ik5nVHRESWlSeXg0QzVmbXB3Vmo4ViIsInBvc2l0aW9uIjoiU1QiLCJpYXQiOjE2NDYwNjU2MjZ9.7jiVEZxlyHCKes_7Zf_pgtix-IIim3yuoomXIWf775E';
+    const event = await api
+      .post('/Event/addPlayer')
+      .send({ eventId })
+      .set('Authorization', `Bearer ${accessToken}`);
+    const events = await Event.find({});
+    console.log(events[0]);
+    expect(events[0].Players.length).toBe(0);
+  });
+
+  ///
+
+  test('delete event', async () => {
+    const accessToken = // root accessToken
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAZ21haWwuY29tIiwiZnVsbE5hbWUiOiJyb290IHJvb3QiLCJpZCI6Ik5nVHRESWlSeXg0QzVmbXB3Vmo4ViIsInBvc2l0aW9uIjoiU1QiLCJpYXQiOjE2NDYwNjU2MjZ9.7jiVEZxlyHCKes_7Zf_pgtix-IIim3yuoomXIWf775E';
+    const event = await api
+      .delete('/Event/deleteEvent')
+      .send({ eventId })
+      .set('Authorization', `Bearer ${accessToken}`);
+    const events = await Event.find({});
+    expect(events.length).toBe(0);
   });
 });
+// EVENT //
 afterAll(() => {
   mongoose.connection.close();
 });
