@@ -66,7 +66,7 @@ function App() {
               <HomePage eventShown={eventShown} setEventShown={setEventShown} />
             }
           />
-          <Route path="/notfound" element={<NotFound />} />
+          <Route path="/:ll" element={<NotFound />} />
           <Route path="/" element={<Login />} />
         </Routes>
       </div>

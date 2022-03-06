@@ -1,27 +1,26 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 function ForgetPassword() {
   const email = useRef<string | any>('');
   const password = useRef<string | any>('');
   const nameOfPet = useRef<string | any>('');
-  const [error, setError] = useState<string | any>('');
+  const notyf = new Notyf();
   const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        'http://localhost:5000/login/forgetPassword',
-        {
-          email: email.current.value,
-          nameOfPet: nameOfPet.current.value,
-          newPassword: password.current.value,
-        }
-      );
+      await axios.post('http://localhost:5000/login/forgetPassword', {
+        email: email.current.value,
+        nameOfPet: nameOfPet.current.value,
+        newPassword: password.current.value,
+      });
       navigate('/');
     } catch (err: any) {
       console.log(err.response.data.error);
-      setError(err.response.data.error);
+      notyf.error(err.response.data.error);
     }
   };
   return (
@@ -52,7 +51,6 @@ function ForgetPassword() {
           change password
         </button>
       </form>
-      <div className="errorMessage">{error}</div>
     </div>
   );
 }

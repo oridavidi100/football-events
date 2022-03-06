@@ -5,12 +5,13 @@ import './style/login.css';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../reducer/actions/action';
 import { getCookie } from '../service/servicesfunc';
-
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 function Login() {
+  const notyf = new Notyf();
   const dispatch = useDispatch();
   const email = useRef<string | any>('');
   const password = useRef<string | any>('');
-  const [error, setError] = useState<string | any>('');
   const navigate = useNavigate();
   useEffect(() => {
     //function that check if the user is logged in before
@@ -46,7 +47,7 @@ function Login() {
       navigate('/HomePage');
     } catch (err: any) {
       console.log(err.response.data.error);
-      setError(err.response.data.error);
+      notyf.error(err.response.data.error);
     }
   };
   return (
@@ -72,7 +73,6 @@ function Login() {
           Login
         </button>
       </form>
-      <div className="errorMessage">{error}</div>
       <button
         className="buttonl"
         type="button"

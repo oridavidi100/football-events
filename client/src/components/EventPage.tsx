@@ -10,9 +10,9 @@ import { setEvents } from '../reducer/actions/action';
 import Chat from './Chat';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
-const notyf = new Notyf();
 
 function EventPage({ event }: { event: Event }) {
+  const notyf = new Notyf();
   const user = useSelector((state: any) => state.user);
   const button = useSelector((state: any) => state.button);
   const dispatch = useDispatch();
@@ -22,6 +22,9 @@ function EventPage({ event }: { event: Event }) {
 
   useEffect((): any => {
     if (!document.cookie) {
+      navigate('/');
+    }
+    if (!user) {
       navigate('/');
     }
     for (let player of event.Players) {

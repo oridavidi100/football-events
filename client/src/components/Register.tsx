@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 function Register() {
   const navigate = useNavigate();
   const email = useRef<string | any>('');
@@ -8,7 +10,7 @@ function Register() {
   const password = useRef<string | any>('');
   const nameOfPet = useRef<string | any>('');
   const fullName = useRef<string | any>('');
-  const [error, setError] = useState<string | any>('');
+  const notyf = new Notyf();
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<any> => {
@@ -23,7 +25,7 @@ function Register() {
       });
       navigate('/');
     } catch (err: any) {
-      setError(err.response.data.error);
+      notyf.error(err.response.data.error);
       console.log(err.response.data.error);
     }
   };
@@ -69,7 +71,6 @@ function Register() {
           register{' '}
         </button>
       </form>
-      <div className="errmessage">{error}</div>
       <button type="button" onClick={() => navigate('/')} className="buttonl">
         login
       </button>
