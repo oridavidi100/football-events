@@ -25,32 +25,34 @@ function ForgetPassword() {
   };
   return (
     <div className="loginDiv">
-      <form onSubmit={e => handleSubmit(e)}>
-        <input
-          type="text"
-          placeholder="email"
-          className="inputL"
-          ref={email}
-          required={true}
-        />
-        <input
-          type="text"
-          placeholder="new password"
-          className="inputL"
-          ref={password}
-          required={true}
-        />
-        <input
-          type="text"
-          placeholder="name of your pet"
-          className="inputL"
-          ref={nameOfPet}
-          required={true}
-        />
-        <button type="submit" className="buttonl">
-          change password
-        </button>
-      </form>
+      <div className="login">
+        <form onSubmit={e => handleSubmit(e)}>
+          <input
+            type="text"
+            placeholder="email"
+            className="inputL"
+            ref={email}
+            required={true}
+          />
+          <input
+            type="text"
+            placeholder="new password"
+            className="inputL"
+            ref={password}
+            required={true}
+          />
+          <input
+            type="text"
+            placeholder="name of your pet"
+            className="inputL"
+            ref={nameOfPet}
+            required={true}
+          />
+          <button type="submit" className="buttonl">
+            change password
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

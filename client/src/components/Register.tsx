@@ -31,49 +31,51 @@ function Register() {
   };
   return (
     <div className="loginDiv">
-      <form onSubmit={e => handleSubmit(e)}>
-        <input
-          type="text"
-          placeholder="email "
-          ref={email}
-          required={true}
-          className="inputL"
-        />
-        <input
-          type="text"
-          placeholder="name of your pet"
-          ref={nameOfPet}
-          required={true}
-          className="inputL"
-        />
-        <input
-          className="inputL"
-          type="text"
-          placeholder="position"
-          ref={position}
-          required={true}
-        />
-        <input
-          className="inputL"
-          type="text"
-          placeholder="fullName"
-          ref={fullName}
-          required={true}
-        />
-        <input
-          className="inputL"
-          type="password"
-          placeholder="password"
-          ref={password}
-          required={true}
-        />
-        <button type="submit" className="buttonl">
-          register{' '}
+      <div className="login">
+        <form onSubmit={e => handleSubmit(e)}>
+          <input
+            type="text"
+            placeholder="email "
+            ref={email}
+            required={true}
+            className="inputL"
+          />
+          <input
+            type="text"
+            placeholder="name of your pet"
+            ref={nameOfPet}
+            required={true}
+            className="inputL"
+          />
+          <input
+            className="inputL"
+            type="text"
+            placeholder="position"
+            ref={position}
+            required={true}
+          />
+          <input
+            className="inputL"
+            type="text"
+            placeholder="fullName"
+            ref={fullName}
+            required={true}
+          />
+          <input
+            className="inputL"
+            type="password"
+            placeholder="password"
+            ref={password}
+            required={true}
+          />
+          <button type="submit" className="buttonl">
+            register{' '}
+          </button>
+        </form>
+        <button type="button" onClick={() => navigate('/')} className="buttonl">
+          login
         </button>
-      </form>
-      <button type="button" onClick={() => navigate('/')} className="buttonl">
-        login
-      </button>
+      </div>
     </div>
   );
 }

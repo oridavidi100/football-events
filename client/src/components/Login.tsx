@@ -53,40 +53,41 @@ function Login() {
   return (
     <div className="loginDiv">
       <div className="shape"></div>
-      <div className="shape"></div>
-      <form className="loginForm" onSubmit={e => handleSubmit(e)}>
-        <input
-          type="text"
-          placeholder="email "
-          ref={email}
-          required={true}
-          className="inputL"
-        />
-        <input
-          className="inputL"
-          type="password"
-          placeholder="password"
-          ref={password}
-          required={true}
-        />
-        <button type="submit" className="buttonl">
-          Login
+      <div className="login">
+        <form className="loginForm" onSubmit={e => handleSubmit(e)}>
+          <input
+            type="text"
+            placeholder="email "
+            ref={email}
+            required={true}
+            className="inputL"
+          />
+          <input
+            className="inputL"
+            type="password"
+            placeholder="password"
+            ref={password}
+            required={true}
+          />
+          <button type="submit" className="buttonl">
+            Login
+          </button>
+        </form>
+        <button
+          className="buttonl"
+          type="button"
+          onClick={() => navigate('/forgetpassword')}
+        >
+          forget password
         </button>
-      </form>
-      <button
-        className="buttonl"
-        type="button"
-        onClick={() => navigate('/forgetpassword')}
-      >
-        forget password
-      </button>
-      <button
-        className="buttonl"
-        type="button"
-        onClick={() => navigate('/register')}
-      >
-        register ?
-      </button>
+        <button
+          className="buttonl"
+          type="button"
+          onClick={() => navigate('/register')}
+        >
+          register ?
+        </button>
+      </div>
     </div>
   );
 }
