@@ -177,7 +177,7 @@ li.active {
 }
 .players {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 .ballButton {
@@ -187,6 +187,7 @@ li.active {
   justify-content: flex-start;
 }
 .player p {
+  font-size: smaller;
   padding: 0px 6px;
   margin: 0.3rem;
 }
@@ -325,3 +326,10 @@ li.active {
 }
 
 /* Chat */
+
+/* notFound */
+
+.notFound {
+}
+
+/* notFound */
