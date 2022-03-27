@@ -13,8 +13,9 @@ function Navbar() {
   const date = useRef<string | any>('');
   const imgSrc = useRef<string | any>('');
   const adress = useRef<string | any>('');
-
+  // const imgFile = useRef<string | any>('');
   const time = useRef<string | any>('');
+  // const [picture, setPicture] = useState<string | ArrayBuffer | null>(null);
   const [formclass, setFormclass] = useState<string>('createEventHide');
 
   const logout = () => {
@@ -31,13 +32,33 @@ function Navbar() {
     }
   };
 
+  // const imageHandler = () => {
+  //   try {
+  //     const file = imgFile.current.files[0];
+  //     console.log(file);
+  //     const reader = new FileReader();
+  //     if (file) {
+  //       reader.onload = () => {
+  //         setPicture(reader.result);
+  //         console.log(picture);
+  //       };
+  //     }
+  //     reader.readAsDataURL(file);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const handlesubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      // imageHandler();
       const dateAndTime = date.current.value + ' ' + time.current.value;
+      let imageUrl;
       if (imgSrc.current.value === '') {
-        imgSrc.current.value =
+        imageUrl =
           'https://mumonarchs.com/images/2021/3/1/facilities_SOC_Duggins_aerial_lighted_DJI_0237_edited.jpg?width=600&height=360&mode=crop';
+      } else {
+        imageUrl = imgSrc.current.value;
       }
       const config = {
         headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
@@ -45,9 +66,10 @@ function Navbar() {
       const res = await axios.post(
         'http://localhost:5000/Event/create',
         {
+          // image: picture,
           location: location.current.value,
           date: dateAndTime,
-          imgSrc: imgSrc.current.value,
+          imgSrc: imageUrl,
           adress: adress.current.value,
         },
         config
@@ -105,6 +127,7 @@ function Navbar() {
         <input type="date" placeholder="date" ref={date} />
         <input type="adress" placeholder="adresss" ref={adress} />
         <input type="url" placeholder="image link" ref={imgSrc} />
+        {/* <input type="file" name="image" ref={imgFile}></input>  */}
         <input type="time" placeholder="time" ref={time} />
         <button>create</button>
       </form>

@@ -3,6 +3,8 @@ import { NextFunction, Request, Response } from 'express';
 import { User } from '../models/User';
 import { nanoid } from 'nanoid';
 import { Message } from '../models/Messages';
+import config from '../config';
+const { cloudinary } = config;
 
 exports.createEvent = async (
   req: Request,
@@ -10,6 +12,10 @@ exports.createEvent = async (
   next: NextFunction
 ) => {
   try {
+    // const { image } = req.body;
+    // console.log(image);
+    // const uploadedResponse = await cloudinary.v2.uploader.upload(image);
+
     const { location, date, imgSrc, adress } = req.body;
     if (!location || !date) {
       throw { status: 400, message: 'missing fields' };
@@ -32,6 +38,7 @@ exports.createEvent = async (
     });
     res.send(event);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
