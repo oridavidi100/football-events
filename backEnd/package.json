@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon src/index.ts",
     "test": "cross-env NODE_ENV=test jest",
-    "start": "tsc && node build/src/index.js"
+    "start": "node build/src/index.js"
   },
   "keywords": [],
   "author": "",
