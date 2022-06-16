@@ -12,7 +12,7 @@ function ForgetPassword() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/login/forgetPassword', {
+      await axios.post('http://localhost:5000/api/login/forgetPassword', {
         email: email.current.value,
         nameOfPet: nameOfPet.current.value,
         newPassword: password.current.value,

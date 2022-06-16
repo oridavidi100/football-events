@@ -23,7 +23,7 @@ function Chat({ eventId }: { eventId: string }) {
 
   useEffect(() => {
     const res = axios
-      .get(`http://localhost:5000/allMessages/${eventId}`)
+      .get(`http://localhost:5000/api/allMessages/${eventId}`)
       .then(res => {
         setMessage(res.data);
       })

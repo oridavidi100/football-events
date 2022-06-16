@@ -87,7 +87,12 @@ body {
 .createEventHide {
   display: none;
 }
-
+.XButton {
+  margin-left: 772%;
+  margin-top: 28%;
+}
+.Xdiv {
+}
 .createEvent {
   background-image: linear-gradient(#0f0c29, #302b63, #24243e);
   display: flex;

@@ -21,7 +21,7 @@ function Login() {
         headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
       };
       axios
-        .post('http://localhost:5000/login', {}, config)
+        .post('http://localhost:5000/api/login', {}, config)
         .then(res => {
           dispatch(setUser(res.data));
           navigate('/HomePage');
@@ -36,7 +36,7 @@ function Login() {
   ): Promise<any> => {
     try {
       e.preventDefault();
-      const res = await axios.post('http://localhost:5000/login', {
+      const res = await axios.post('http://localhost:5000/api/login', {
         email: email.current.value,
         password: password.current.value,
       });

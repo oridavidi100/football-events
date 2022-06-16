@@ -21,7 +21,7 @@ function ProfilePage() {
   const changePosition = async () => {
     try {
       const res = await axios.put(
-        'http://localhost:5000/getUser/changposition',
+        'http://localhost:5000/api/getUser/changposition',
         {
           newPosition: newPos.current.value,
           email: user.email,

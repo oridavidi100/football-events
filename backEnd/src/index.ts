@@ -11,6 +11,7 @@ import { Server } from 'socket.io';
 import { createServer } from 'http';
 import { Message } from './models/Messages';
 const httpServer = createServer(app);
+import path from 'path';
 const io = new Server(httpServer, {
   cors: {
     origin: ['http://localhost:3000'],
@@ -48,8 +49,11 @@ if (MONGO_URL) {
 app.use(cors()); //cors middleware
 app.use(express.json()); //json middleware
 
-app.use('/', Router);
-
+app.use('/api', Router);
+app.use(express.static(path.resolve(__dirname, '../../client')));
+app.get('*', function (request, response) {
+  response.sendFile(path.resolve(__dirname, '../../client', 'index.html'));
+});
 app.use(errorHandlerMiddleware);
 
 export const server = httpServer.listen(PORT, () =>

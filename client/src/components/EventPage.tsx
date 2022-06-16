@@ -42,7 +42,7 @@ function EventPage({ event }: { event: Event }) {
     };
     try {
       const res = await axios.delete(
-        'http://localhost:5000/Event/deleteEvent',
+        'http://localhost:5000/api/Event/deleteEvent',
         {
           headers: {
             Authorization: `Bearer ${getCookie('accessToken')}`,
@@ -73,7 +73,7 @@ function EventPage({ event }: { event: Event }) {
     };
     try {
       const res = await axios.post(
-        'http://localhost:5000/Event/addPlayer',
+        'http://localhost:5000/api/Event/addPlayer',
         {
           eventId: event._id,
         },
@@ -91,14 +91,14 @@ function EventPage({ event }: { event: Event }) {
     };
     try {
       const res = await axios.post(
-        'http://localhost:5000/Event/giveBall',
+        'http://localhost:5000/api/Event/giveBall',
         {
           eventId: event._id,
         },
         config
       );
       axios
-        .get('http://localhost:5000/getAllEvents')
+        .get('http://localhost:5000/api/getAllEvents')
         .then(res => {
           dispatch(setEvents(res.data));
         })

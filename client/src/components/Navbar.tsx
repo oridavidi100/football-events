@@ -64,7 +64,7 @@ function Navbar() {
         headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
       };
       const res = await axios.post(
-        'http://localhost:5000/Event/create',
+        'http://localhost:5000/api/Event/create',
         {
           // image: picture,
           location: location.current.value,
@@ -75,12 +75,12 @@ function Navbar() {
         config
       );
       axios
-        .get('http://localhost:5000/getAllEvents')
+        .get('http://localhost:5000/api/getAllEvents')
         .then(res => {
           dispatch(setEvents(res.data));
         })
         .catch(err => {
-          console.log(err.response.data.error);
+          // console.log(err.response.data.error);
         });
       addEvent();
       location.current.value = '';
@@ -89,7 +89,7 @@ function Navbar() {
       adress.current.value = '';
       time.current.value = '';
     } catch (err: any) {
-      console.log(err.response.data.error);
+      // console.log(err.response.data.error);
     }
   };
   return (
@@ -123,6 +123,11 @@ function Navbar() {
         }}
         className={formclass}
       >
+        <div className="Xdiv">
+          <button onClick={addEvent} className="XButton">
+            X
+          </button>
+        </div>
         <input type="text" placeholder="location" ref={location} />
         <input type="date" placeholder="date" ref={date} />
         <input type="adress" placeholder="adresss" ref={adress} />

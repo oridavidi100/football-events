@@ -22,7 +22,7 @@ function HomePage({
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/getAllEvents')
+      .get('http://localhost:5000/api/getAllEvents')
       .then(res => {
         dispatch(setEvents(res.data));
       })

@@ -16,7 +16,7 @@ function Register() {
   ): Promise<any> => {
     try {
       e.preventDefault();
-      const res = await axios.post('http://localhost:5000/register', {
+      const res = await axios.post('http://localhost:5000/api/register', {
         email: email.current.value,
         position: position.current.value,
         password: password.current.value,
