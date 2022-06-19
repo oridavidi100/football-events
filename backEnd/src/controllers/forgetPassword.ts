@@ -22,7 +22,7 @@ exports.forgetPassword = async (
           .status(200)
           .send({ message: 'password changed', username: user.fullName });
       }
-      throw { status: 400, message: 'name of pet not right' };
+      throw { status: 400, message: 'wrong name of pet' };
     }
   } catch (error) {
     next(error);
