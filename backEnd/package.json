@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "engines": {
+    "node": "14.18.0"
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon src/index.ts",
     "test": "cross-env NODE_ENV=test jest",
