@@ -1,0 +1,20 @@
+{
+  "name": "football-events",
+  "version": "1.0.0",
+  "description": "- **[React](https://reactjs.org/) - For the frontend**\r - **[TypeScript](https://www.typescriptlang.org/) - As a programming language**\r - **[React Router DOM](https://www.npmjs.com/package/react-router-dom) - To create single page app**\r - **[Redux](https://redux.js.org/) - for state management**\r - **[Docker](https://www.docker.com/) - For global use**\r - **[Socket.io](https://socket.io/) - For live connection**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oridavidi100/football-events.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oridavidi100/football-events/issues"
+  },
+  "homepage": "https://github.com/oridavidi100/football-events#readme"
+}
