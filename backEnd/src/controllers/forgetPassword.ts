@@ -10,7 +10,7 @@ exports.forgetPassword = async (
     const { email, nameOfPet, newPassword } = req.body;
     const usersArr = await User.find({ email: email });
     if (usersArr.length === 0) {
-      throw { status: 400, message: 'user does not exist' };
+      throw { status: 400, message: 'user  not exist' };
     }
     for (let user of usersArr) {
       if (user.nameOfPet === nameOfPet) {
