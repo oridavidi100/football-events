@@ -8,10 +8,10 @@ COPY  package.json  ./
 COPY tsconfig.json ./
 
 # Install dependencies
-RUN    npm install 
+RUN npm install 
 
 
 COPY . .
 
 # Run our app.
-CMD ["npm", "run","dev"]
+CMD ["npm", "run","start"]
