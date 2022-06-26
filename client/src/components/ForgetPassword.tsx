@@ -2,8 +2,11 @@ import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Notyf } from 'notyf';
+import { useSelector } from 'react-redux';
+
 import 'notyf/notyf.min.css';
 function ForgetPassword() {
+  const baseUrl = useSelector((state: any) => state.baseUrl);
   const email = useRef<string | any>('');
   const password = useRef<string | any>('');
   const nameOfPet = useRef<string | any>('');
@@ -12,7 +15,7 @@ function ForgetPassword() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/login/forgetPassword', {
+      await axios.post(`${baseUrl}/api/login/forgetPassword`, {
         email: email.current.value,
         nameOfPet: nameOfPet.current.value,
         newPassword: password.current.value,

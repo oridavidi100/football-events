@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 function Register() {
   const navigate = useNavigate();
+  const baseUrl = useSelector((state: any) => state.baseUrl);
   const email = useRef<string | any>('');
   const position = useRef<string | any>('');
   const password = useRef<string | any>('');
@@ -16,7 +18,7 @@ function Register() {
   ): Promise<any> => {
     try {
       e.preventDefault();
-      const res = await axios.post('http://localhost:5000/api/register', {
+      const res = await axios.post(`${baseUrl}/api/register`, {
         email: email.current.value,
         position: position.current.value,
         password: password.current.value,

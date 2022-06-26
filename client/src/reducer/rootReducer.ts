@@ -8,12 +8,14 @@ interface InitalState {
   user: User | string;
   events: Event | string;
   button: string;
+  baseUrl: string;
 }
 
 const initalState: InitalState = {
   user: '',
   events: '',
   button: '',
+  baseUrl: 'https://ori-football-app.herokuapp.com/',
 };
 
 const rootreducer = (state = initalState, action: Action) => {

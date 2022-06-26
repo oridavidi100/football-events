@@ -4,11 +4,11 @@ import { io, Socket } from 'socket.io-client';
 import axios from 'axios';
 import moment from 'moment';
 function Chat({ eventId }: { eventId: string }) {
+  const baseUrl = useSelector((state: any) => state.baseUrl);
   const user = useSelector((state: any) => state.user);
   const [message, setMessage] = useState<any>([]);
   const socketRef = useRef<Socket>();
   const inputM = useRef<string | any>('');
-
   //nake the chat move to the bottom
 
   const messageEl = useRef<HTMLDivElement | null>(null);
@@ -23,14 +23,14 @@ function Chat({ eventId }: { eventId: string }) {
 
   useEffect(() => {
     const res = axios
-      .get(`http://localhost:5000/api/allMessages/${eventId}`)
+      .get(`${baseUrl}/api/allMessages/${eventId}`)
       .then(res => {
         setMessage(res.data);
       })
       .catch(err => {
         console.log(err);
       });
-    socketRef.current = io('http://localhost:5000');
+    socketRef.current = io(`${baseUrl}`);
     socketRef.current!.emit('join', {
       room: eventId,
     });

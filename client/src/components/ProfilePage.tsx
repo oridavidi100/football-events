@@ -7,6 +7,7 @@ const axios = require('axios');
 function ProfilePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const baseUrl = useSelector((state: any) => state.baseUrl);
   const user = useSelector((state: any) => state.user);
   const newPos = useRef<string | any>('');
   useEffect((): any => {
@@ -20,13 +21,10 @@ function ProfilePage() {
 
   const changePosition = async () => {
     try {
-      const res = await axios.put(
-        'http://localhost:5000/api/getUser/changposition',
-        {
-          newPosition: newPos.current.value,
-          email: user.email,
-        }
-      );
+      const res = await axios.put(`${baseUrl}/api/getUser/changposition`, {
+        newPosition: newPos.current.value,
+        email: user.email,
+      });
       dispatch(changePos(newPos.current.value));
     } catch (err: any) {
       console.log(err.response.data.error);

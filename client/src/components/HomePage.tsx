@@ -14,6 +14,7 @@ function HomePage({
   eventShown: Event[];
   setEventShown: React.Dispatch<React.SetStateAction<Event[]>>;
 }) {
+  const baseUrl = useSelector((state: any) => state.baseUrl);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const search = useRef<string | any>('');
@@ -22,7 +23,7 @@ function HomePage({
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/getAllEvents')
+      .get(`${baseUrl}/api/getAllEvents`)
       .then(res => {
         dispatch(setEvents(res.data));
       })

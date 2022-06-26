@@ -16,6 +16,7 @@ import Navbar from './Navbar';
 import Chat from './Chat';
 
 function App() {
+  const baseUrl = useSelector((state: any) => state.baseUrl);
   const user = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
   const button = useSelector((state: any) => state.button);
@@ -29,7 +30,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/getAllEvents')
+      .get(`${baseUrl}/api/getAllEvents`)
       .then(res => {
         dispatch(setEvents(res.data));
       })

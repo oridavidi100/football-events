@@ -12,6 +12,7 @@ import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 
 function EventPage({ event }: { event: Event }) {
+  const baseUrl = useSelector((state: any) => state.baseUrl);
   const notyf = new Notyf();
   const user = useSelector((state: any) => state.user);
   const button = useSelector((state: any) => state.button);
@@ -41,17 +42,14 @@ function EventPage({ event }: { event: Event }) {
       headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
     };
     try {
-      const res = await axios.delete(
-        'http://localhost:5000/api/Event/deleteEvent',
-        {
-          headers: {
-            Authorization: `Bearer ${getCookie('accessToken')}`,
-          },
-          data: {
-            eventId: event._id,
-          },
-        }
-      );
+      const res = await axios.delete(`${baseUrl}/api/Event/deleteEvent`, {
+        headers: {
+          Authorization: `Bearer ${getCookie('accessToken')}`,
+        },
+        data: {
+          eventId: event._id,
+        },
+      });
       navigate('/');
     } catch (err: any) {
       notyf.error(err.response.data.error);
@@ -73,7 +71,7 @@ function EventPage({ event }: { event: Event }) {
     };
     try {
       const res = await axios.post(
-        'http://localhost:5000/api/Event/addPlayer',
+        `${baseUrl}/api/Event/addPlayer`,
         {
           eventId: event._id,
         },
@@ -91,14 +89,14 @@ function EventPage({ event }: { event: Event }) {
     };
     try {
       const res = await axios.post(
-        'http://localhost:5000/api/Event/giveBall',
+        `${baseUrl}/api/Event/giveBall`,
         {
           eventId: event._id,
         },
         config
       );
       axios
-        .get('http://localhost:5000/api/getAllEvents')
+        .get(`${baseUrl}/api/getAllEvents`)
         .then(res => {
           dispatch(setEvents(res.data));
         })

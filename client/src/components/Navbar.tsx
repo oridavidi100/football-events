@@ -3,12 +3,13 @@ import { setUser } from '../reducer/actions/action';
 import axios from 'axios';
 import { getCookie } from '../service/servicesfunc';
 import { setEvents } from '../reducer/actions/action';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const baseUrl = useSelector((state: any) => state.baseUrl);
   const location = useRef<string | any>('');
   const date = useRef<string | any>('');
   const imgSrc = useRef<string | any>('');
@@ -32,22 +33,6 @@ function Navbar() {
     }
   };
 
-  // const imageHandler = () => {
-  //   try {
-  //     const file = imgFile.current.files[0];
-  //     console.log(file);
-  //     const reader = new FileReader();
-  //     if (file) {
-  //       reader.onload = () => {
-  //         setPicture(reader.result);
-  //         console.log(picture);
-  //       };
-  //     }
-  //     reader.readAsDataURL(file);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const handlesubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -64,7 +49,7 @@ function Navbar() {
         headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
       };
       const res = await axios.post(
-        'http://localhost:5000/api/Event/create',
+        `${baseUrl}/api/Event/create`,
         {
           // image: picture,
           location: location.current.value,
@@ -75,7 +60,7 @@ function Navbar() {
         config
       );
       axios
-        .get('http://localhost:5000/api/getAllEvents')
+        .get(`${baseUrl}/api/getAllEvents`)
         .then(res => {
           dispatch(setEvents(res.data));
         })

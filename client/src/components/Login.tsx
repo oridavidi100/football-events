@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './style/login.css';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../reducer/actions/action';
 import { getCookie } from '../service/servicesfunc';
 import { Notyf } from 'notyf';
@@ -10,6 +10,7 @@ import 'notyf/notyf.min.css';
 function Login() {
   const notyf = new Notyf();
   const dispatch = useDispatch();
+  const baseUrl = useSelector((state: any) => state.baseUrl);
   const email = useRef<string | any>('');
   const password = useRef<string | any>('');
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Login() {
         headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
       };
       axios
-        .post('http://localhost:5000/api/login', {}, config)
+        .post(`${baseUrl}/api/login`, {}, config)
         .then(res => {
           dispatch(setUser(res.data));
           navigate('/HomePage');
@@ -36,7 +37,7 @@ function Login() {
   ): Promise<any> => {
     try {
       e.preventDefault();
-      const res = await axios.post('http://localhost:5000/api/login', {
+      const res = await axios.post(`${baseUrl}/api/login`, {
         email: email.current.value,
         password: password.current.value,
       });
