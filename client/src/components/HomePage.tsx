@@ -73,19 +73,36 @@ function HomePage({
                 {/* <p>{moment(event.date).format('h:mm a')}</p> */}
 
                 <img
+                  className="smallEventImg"
                   src={event.img}
                   alt="eventImage"
-                  width={100}
-                  height={100}
+                  // width={100}
+                  // height={100}
                 />
-                <br />
+
                 <Link
                   className="linkToDetails"
                   to={`/${event.location.replaceAll(' ', '-')}/${moment(
                     event.date
                   ).format('dddd')}`}
                 >
-                  more details
+                  <span className="hover-underline-animation">
+                    more details
+                  </span>
+                  <svg
+                    id="arrow-horizontal"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="10"
+                    viewBox="0 0 46 16"
+                  >
+                    <path
+                      id="Path_10"
+                      data-name="Path 10"
+                      d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                      transform="translate(30)"
+                    ></path>
+                  </svg>
                 </Link>
               </div>
             );
@@ -94,5 +111,23 @@ function HomePage({
     </div>
   );
 }
-
+{
+  /* <button class="cta">
+  <span class="hover-underline-animation"> Shop now </span>
+  <svg
+    id="arrow-horizontal"
+    xmlns="http://www.w3.org/2000/svg"
+    width="30"
+    height="10"
+    viewBox="0 0 46 16"
+  >
+    <path
+      id="Path_10"
+      data-name="Path 10"
+      d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+      transform="translate(30)"
+    ></path>
+  </svg>
+</button>; */
+}
 export default HomePage;

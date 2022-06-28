@@ -33,7 +33,6 @@ function EventPage({ event }: { event: Event }) {
         return dispatch(setButton('remove'));
       }
     }
-    console.log(time, date);
     return dispatch(setButton('join'));
   }, []);
 
@@ -151,7 +150,6 @@ function EventPage({ event }: { event: Event }) {
           <img src={event.img} alt="event" className="eventPageImg" />
         </div>
       </div>
-      {/* <div className="errorMessage">{error}</div> */}
     </div>
   );
 }

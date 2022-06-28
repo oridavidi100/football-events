@@ -2,14 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { changePos } from '../reducer/actions/action';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-const axios = require('axios');
+import axios from 'axios';
 
 function ProfilePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const baseUrl = useSelector((state: any) => state.baseUrl);
   const user = useSelector((state: any) => state.user);
+
   const newPos = useRef<string | any>('');
+
   useEffect((): any => {
     newPos.current.value = user.position;
   }, []);
@@ -21,7 +24,7 @@ function ProfilePage() {
 
   const changePosition = async () => {
     try {
-      const res = await axios.put(`${baseUrl}/api/getUser/changposition`, {
+      await axios.put(`${baseUrl}/api/getUser/changposition`, {
         newPosition: newPos.current.value,
         email: user.email,
       });

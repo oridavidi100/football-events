@@ -47,7 +47,6 @@ function Login() {
         'accessToken' + '=' + res.data.accessToken + ';expires=' + '120';
       navigate('/HomePage');
     } catch (err: any) {
-      console.log(err.response.data.error);
       notyf.error(err.response.data.error);
     }
   };

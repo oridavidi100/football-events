@@ -22,7 +22,6 @@ function ForgetPassword() {
       });
       navigate('/');
     } catch (err: any) {
-      console.log(err.response.data.error);
       notyf.error(err.response.data.error);
     }
   };

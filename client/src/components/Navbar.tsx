@@ -64,18 +64,14 @@ function Navbar() {
         .then(res => {
           dispatch(setEvents(res.data));
         })
-        .catch(err => {
-          // console.log(err.response.data.error);
-        });
+        .catch(err => {});
       addEvent();
       location.current.value = '';
       date.current.value = '';
       imgSrc.current.value = '';
       adress.current.value = '';
       time.current.value = '';
-    } catch (err: any) {
-      // console.log(err.response.data.error);
-    }
+    } catch (err: any) {}
   };
   return (
     <div className="navbar">

@@ -35,7 +35,6 @@ function Chat({ eventId }: { eventId: string }) {
       room: eventId,
     });
     socketRef.current.on('messageBack', ({ name, message }) => {
-      console.log(name, message);
       setMessage((prev: any) => [...prev, { name, message }]);
     });
   }, []);
