@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../reducer/actions/action';
 import { getCookie } from '../service/servicesfunc';
 import { Notyf } from 'notyf';
+
 import ballPic from '../photos/ball.png';
 import 'notyf/notyf.min.css';
 function Login() {

@@ -131,7 +131,6 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .locationF {
-  text-transform: capitalize;
   font-weight: 600;
 }
 /* Home page */
