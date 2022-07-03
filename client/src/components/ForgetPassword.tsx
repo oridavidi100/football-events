@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Notyf } from 'notyf';
 import { useSelector } from 'react-redux';
+import ballPic from '../photos/ball.png';
 
 import 'notyf/notyf.min.css';
 function ForgetPassword() {
@@ -27,7 +28,14 @@ function ForgetPassword() {
   };
   return (
     <div className="loginDiv">
+      <div className="webIntro">
+        <div className="webIntroDiv">Ori's football app</div>
+        <div>
+          <img className="imgIntro" src={ballPic} alt="ssss" />
+        </div>
+      </div>
       <div className="login">
+        <p className="loginIntro">Forget password</p>
         <form onSubmit={e => handleSubmit(e)}>
           <input
             type="text"
@@ -51,9 +59,12 @@ function ForgetPassword() {
             required={true}
           />
           <button type="submit" className="buttonl">
-            change password
+            Change password
           </button>
         </form>
+        <button type="button" className="buttonl" onClick={() => navigate('/')}>
+          Back to login
+        </button>
       </div>
     </div>
   );
