@@ -18,8 +18,8 @@ function EventPage({ event }: { event: Event }) {
   const button = useSelector((state: any) => state.button);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [date, setDate] = useState(moment(event.date).format('DD/MM/YYYY'));
-  const [time, setTime] = useState(moment(event.date).format('HH:mm'));
+  // const [date, setDate] = useState(moment(event.date).format('DD/MM/YYYY'));
+  // const [time, setTime] = useState(moment(event.date).format('HH:mm'));
 
   useEffect((): any => {
     if (!document.cookie) {
@@ -106,6 +106,7 @@ function EventPage({ event }: { event: Event }) {
       console.log(err.response.data.error);
     }
   };
+  console.log(moment(event.date).format('HH:mm'));
 
   return (
     <div className="eventpage">
@@ -121,8 +122,10 @@ function EventPage({ event }: { event: Event }) {
               {event.adress}
             </a>
           </p>
-          <p className="date">Date :{date}</p>
-          <p className="time">Time :{time}</p>
+          <p className="date">
+            Date :{moment(event.date).format('DD/MM/YYYY')}
+          </p>
+          <p className="time">Time :{moment(event.date).format('HH:mm')}</p>
           <p className="creator"> Created by :{event.creator.fullName}</p>
           <p>Players ({event.Players.length}):</p>
           <div className="players">
