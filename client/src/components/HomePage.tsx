@@ -70,23 +70,19 @@ function HomePage({
                 <p>{moment(event.date).format('dddd')}</p>
                 <p>
                   {moment(event.date).format('MMMM Do YYYY')} ,
-                  {moment(event.date).format('HH:MM')}
+                  {moment(event.date).format('HH:mm')}
                 </p>
-                {/* <p>{moment(event.date).format('h:mm a')}</p> */}
-
                 <img
                   className="smallEventImg"
                   src={event.img}
                   alt="eventImage"
-                  // width={100}
-                  // height={100}
                 />
 
                 <Link
                   className="linkToDetails"
                   to={`/${event.location.replaceAll(' ', '-')}/${moment(
                     event.date
-                  ).format('dddd')}`}
+                  ).format('dddd')}/${event._id}`}
                 >
                   <span className="hover-underline-animation">
                     more details

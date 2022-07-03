@@ -51,7 +51,7 @@ function App() {
                 <Route
                   path={`${event.location.replaceAll(' ', '-')}/${moment(
                     event.date
-                  ).format('dddd')}`}
+                  ).format('dddd')}/${event._id}`}
                   element={<EventPage event={event} key={event._id} />}
                 />
               );
