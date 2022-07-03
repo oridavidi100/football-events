@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { changePos } from '../reducer/actions/action';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { postions } from '../service/servicesfunc';
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -37,18 +38,16 @@ function ProfilePage() {
     <div className="profile">
       {user && (
         <div className="details">
-          <p> name : {user.fullName}</p>
-          <p> email : {user.email}</p>
-          <p> position :{/* {user.position} */}</p>
-          <input
-            ref={newPos}
-            type="text"
-            required={true}
-            placeholder="new position"
-          />
-          <button type="button" onClick={changePosition}>
-            change position
-          </button>
+          <p> Name : {user.fullName}</p>
+          <p> Email : {user.email}</p>
+          <p>
+            Position :{' '}
+            <select ref={newPos} onChange={changePosition}>
+              {postions.map((position: string) => {
+                return <option value={position}>{position}</option>;
+              })}
+            </select>
+          </p>
         </div>
       )}
     </div>
