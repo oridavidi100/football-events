@@ -3,21 +3,35 @@ import { setUser } from '../reducer/actions/action';
 import axios from 'axios';
 import { getCookie } from '../service/servicesfunc';
 import { setEvents } from '../reducer/actions/action';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 function Navbar() {
+  const path = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const baseUrl = useSelector((state: any) => state.baseUrl);
   const location = useRef<string | any>('');
   const date = useRef<string | any>('');
   const imgSrc = useRef<string | any>('');
   const adress = useRef<string | any>('');
-  // const imgFile = useRef<string | any>('');
   const time = useRef<string | any>('');
-  // const [picture, setPicture] = useState<string | ArrayBuffer | null>(null);
+
   const [formclass, setFormclass] = useState<string>('createEventHide');
+  const [navClass, setNavClass] = useState<string>('');
+
+  useEffect(() => {
+    if (
+      path.pathname === '/' ||
+      path.pathname === '/register' ||
+      path.pathname === '/forgetpassword'
+    ) {
+      setNavClass('navbar');
+    } else {
+      setNavClass('');
+    }
+  });
 
   const logout = () => {
     document.cookie =
@@ -74,28 +88,38 @@ function Navbar() {
     } catch (err: any) {}
   };
   return (
-    <div className="navbar">
+    <div className={navClass}>
       <nav className="nav">
         <ul>
           <li>
-            <button type="button" onClick={() => navigate('/HomePage')}>
-              home page
+            <button
+              className="navbarBtn"
+              type="button"
+              onClick={() => navigate('/HomePage')}
+            >
+              Home page
             </button>
           </li>
           <li>
-            <button onClick={addEvent}>add event </button>
+            <button className="navbarBtn" onClick={addEvent}>
+              Add event{' '}
+            </button>
           </li>
           <li>
             <button
               onClick={() => {
                 navigate('/profile');
               }}
+              className="navbarBtn"
             >
-              profile
+              Profile
             </button>
           </li>
-          <button onClick={logout}>logout</button>
-          <li></li>
+          <li className="logoutLi">
+            <button className="logoutBtn" onClick={logout}>
+              Logout
+            </button>
+          </li>
         </ul>
       </nav>
       <form
