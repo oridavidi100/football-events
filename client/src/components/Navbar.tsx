@@ -64,7 +64,6 @@ function Navbar() {
   //filter city
 
   const filterCity = () => {
-    console.log(location.current.value);
     const str: string = location.current.value;
     setCitiesFiltered(
       citiesJson.filter((city: City) => {
@@ -81,8 +80,6 @@ function Navbar() {
       // imageHandler();
       const now: string | Date = moment().format();
       const dateAndTime = date.current.value + ' ' + time.current.value;
-      console.log(dateAndTime);
-      console.log(moment('2022-07-22T17:30:00.000Z').format());
       if (Date.parse(dateAndTime) - Date.parse(now) < 0) {
         return notyf.error('The date you chosed has passed');
       }
