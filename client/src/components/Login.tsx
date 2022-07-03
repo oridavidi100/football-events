@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../reducer/actions/action';
 import { getCookie } from '../service/servicesfunc';
 import { Notyf } from 'notyf';
+import ballPic from '../photos/ball.png';
 import 'notyf/notyf.min.css';
 function Login() {
   const notyf = new Notyf();
@@ -52,8 +53,15 @@ function Login() {
   };
   return (
     <div className="loginDiv">
+      <div className="webIntro">
+        <div className="webIntroDiv">Ori's football app</div>
+        <div>
+          <img className="imgIntro" src={ballPic} alt="ssss" />
+        </div>
+      </div>
       <div className="shape"></div>
       <div className="login">
+        <p className="loginIntro">Login</p>
         <form className="loginForm" onSubmit={e => handleSubmit(e)}>
           <input
             type="text"
@@ -78,15 +86,22 @@ function Login() {
           type="button"
           onClick={() => navigate('/forgetpassword')}
         >
-          forget password
+          Forget password
         </button>
-        <button
-          className="buttonl"
-          type="button"
-          onClick={() => navigate('/register')}
-        >
-          register ?
-        </button>
+        <p>
+          <span>Dont have account yet ?</span>
+          <button
+            style={{
+              marginLeft: '1em',
+              display: 'inline',
+            }}
+            className="buttonl"
+            type="button"
+            onClick={() => navigate('/register')}
+          >
+            Register ?
+          </button>
+        </p>
       </div>
     </div>
   );
