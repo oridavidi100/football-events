@@ -51,10 +51,12 @@ function HomePage({
   return (
     <div className="homePage">
       <div className="homePage__header">
-        Hello {user.fullName} wellcome to the home page of the best football
-        events over the countery
+        <div className="nameInHomePage">Hello {user.fullName} </div>
+        <div>
+          Welcome to the home page of the best football events over the countery
+        </div>
         <div className="searchBar">
-          <p style={{ margin: 0 }}>search event by city </p>
+          <p style={{ margin: 0 }}>Search event by city </p>
           <input type="text" onChange={handleChange} ref={search}></input>
         </div>
       </div>
