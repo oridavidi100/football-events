@@ -1,15 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { setUser } from '../reducer/actions/action';
 import axios from 'axios';
+import moment from 'moment';
+
+import citiesJson from '../service/cities.json';
+import { City } from '../@types';
 import { getCookie } from '../service/servicesfunc';
 import { setEvents } from '../reducer/actions/action';
+
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Notyf } from 'notyf';
 
 function Navbar() {
   const path = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const notyf = new Notyf();
 
   const baseUrl = useSelector((state: any) => state.baseUrl);
   const location = useRef<string | any>('');
@@ -17,6 +25,9 @@ function Navbar() {
   const imgSrc = useRef<string | any>('');
   const adress = useRef<string | any>('');
   const time = useRef<string | any>('');
+  const city = useRef<string | any>('');
+
+  const [citiesFiltered, setCitiesFiltered] = useState<City[]>(citiesJson);
 
   const [formclass, setFormclass] = useState<string>('createEventHide');
   const [navClass, setNavClass] = useState<string>('');
@@ -39,6 +50,9 @@ function Navbar() {
     dispatch(setUser(''));
     navigate('/');
   };
+
+  // hide or show the add event option
+
   const addEvent = () => {
     if (formclass === 'createEventHide') {
       setFormclass('createEvent');
@@ -47,11 +61,31 @@ function Navbar() {
     }
   };
 
+  //filter city
+
+  const filterCity = () => {
+    console.log(location.current.value);
+    const str: string = location.current.value;
+    setCitiesFiltered(
+      citiesJson.filter((city: City) => {
+        return city.english_name.toLowerCase().includes(str);
+      })
+    );
+  };
+
+  // submit new event
+
   const handlesubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       // imageHandler();
+      const now: string | Date = moment().format();
       const dateAndTime = date.current.value + ' ' + time.current.value;
+      console.log(dateAndTime);
+      console.log(moment('2022-07-22T17:30:00.000Z').format());
+      if (Date.parse(dateAndTime) - Date.parse(now) < 0) {
+        return notyf.error('The date you chosed has passed');
+      }
       let imageUrl;
       if (imgSrc.current.value === '') {
         imageUrl =
@@ -62,11 +96,16 @@ function Navbar() {
       const config = {
         headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
       };
+      const cityUpperCase = city.current.value.replaceAll(
+        /\S*/g,
+        (word: any) => `${word.slice(0, 1)}${word.slice(1).toLowerCase()}`
+      );
+
       const res = await axios.post(
         `${baseUrl}/api/Event/create`,
         {
           // image: picture,
-          location: location.current.value,
+          location: cityUpperCase,
           date: dateAndTime,
           imgSrc: imageUrl,
           adress: adress.current.value,
@@ -133,12 +172,31 @@ function Navbar() {
             X
           </button>
         </div>
-        <input type="text" placeholder="location" ref={location} />
-        <input type="date" placeholder="date" ref={date} />
-        <input type="adress" placeholder="adresss" ref={adress} />
+
+        <input
+          type="text"
+          placeholder="City"
+          ref={location}
+          required={true}
+          list="cities"
+          onChange={filterCity}
+        />
+        <select id="cities" ref={city}>
+          {citiesFiltered.map((city: City) => {
+            return (
+              <option value={city.english_name}>{city.english_name}</option>
+            );
+          })}
+        </select>
+        <input type="date" placeholder="date" ref={date} required={true} />
+        <input
+          type="adress"
+          placeholder="adresss"
+          ref={adress}
+          required={true}
+        />
         <input type="url" placeholder="image link" ref={imgSrc} />
-        {/* <input type="file" name="image" ref={imgFile}></input>  */}
-        <input type="time" placeholder="time" ref={time} />
+        <input type="time" placeholder="time" ref={time} required={true} />
         <button>create</button>
       </form>
     </div>
