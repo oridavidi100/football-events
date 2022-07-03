@@ -30,10 +30,10 @@ function EventPage({ event }: { event: Event }) {
     }
     for (let player of event.Players) {
       if (player._id === user.id) {
-        return dispatch(setButton('remove'));
+        return dispatch(setButton('Remove'));
       }
     }
-    return dispatch(setButton('join'));
+    return dispatch(setButton('Join'));
   }, []);
 
   const deleteEvent = async () => {
@@ -114,23 +114,23 @@ function EventPage({ event }: { event: Event }) {
       </div>
       <div className="info ">
         <div className="detailsPage">
-          <p className="location"> location: {event.location}</p>
-          <address className="adress">
-            adress:
+          <p className="location"> Location: {event.location}</p>
+          <p className="adress">
+            Address:
             <a href={`https://maps.google.com/?q=${event.adress}`}>
               {event.adress}
             </a>
-          </address>
-          <p className="date">date :{date}</p>
-          <p className="time">time :{time}</p>
-          <p className="creator"> create by :{event.creator.fullName}</p>
-          <p>players ({event.Players.length}):</p>
+          </p>
+          <p className="date">Date :{date}</p>
+          <p className="time">Time :{time}</p>
+          <p className="creator"> Created by :{event.creator.fullName}</p>
+          <p>Players ({event.Players.length}):</p>
           <div className="players">
             {event.Players.map((player: User) => {
               return (
                 <div className="player" key={player._id}>
                   <p>{player.fullName}</p>
-                  <p>positon : {player.position}</p>
+                  <p>Positon : {player.position}</p>
                   <p>{hasBall(player._id) ? '⚽' : ''}</p>
                 </div>
               );
