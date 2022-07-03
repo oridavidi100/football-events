@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { Notyf } from 'notyf';
+import ballPic from '../photos/ball.png';
+import { postions } from '../service/servicesfunc';
+
 import 'notyf/notyf.min.css';
 function Register() {
   const navigate = useNavigate();
@@ -33,7 +36,14 @@ function Register() {
   };
   return (
     <div className="loginDiv">
+      <div className="webIntro">
+        <div className="webIntroDiv">Ori's football app</div>
+        <div>
+          <img className="imgIntro" src={ballPic} alt="ssss" />
+        </div>
+      </div>
       <div className="login">
+        <p className="loginIntro">Register</p>
         <form onSubmit={e => handleSubmit(e)}>
           <input
             type="text"
@@ -49,17 +59,15 @@ function Register() {
             required={true}
             className="inputL"
           />
+          <select ref={position}>
+            {postions.map((position: string) => {
+              return <option value={position}>{position}</option>;
+            })}
+          </select>
           <input
             className="inputL"
             type="text"
-            placeholder="position"
-            ref={position}
-            required={true}
-          />
-          <input
-            className="inputL"
-            type="text"
-            placeholder="fullName"
+            placeholder="full name"
             ref={fullName}
             required={true}
           />
@@ -71,12 +79,24 @@ function Register() {
             required={true}
           />
           <button type="submit" className="buttonl">
-            register{' '}
+            Register
           </button>
         </form>
-        <button type="button" onClick={() => navigate('/')} className="buttonl">
-          login
-        </button>
+        <p>
+          <span>Alreay have account ?</span>
+          <button
+            style={{
+              marginTop: '0em',
+              marginLeft: '1em',
+              display: 'inline',
+            }}
+            className="buttonl"
+            type="button"
+            onClick={() => navigate('/')}
+          >
+            login
+          </button>
+        </p>
       </div>
     </div>
   );
