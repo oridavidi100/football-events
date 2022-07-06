@@ -2,7 +2,7 @@
   font-family: 'Gantari', sans-serif;
 }
 .loginIntro {
-  font-size: larger;
+  font-size: 175%;
   color: aliceblue;
 }
 .webIntro {
@@ -85,4 +85,7 @@
   border: 2px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 40px rgb(8 7 16 / 60%);
   padding: 50px 35px;
+}
+.hasAccount {
+  color: wheat;
 }

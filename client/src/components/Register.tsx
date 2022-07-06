@@ -83,7 +83,7 @@ function Register() {
           </button>
         </form>
         <p>
-          <span>Alreay have account ?</span>
+          <span className="hasAccount">Already have an account? ?</span>
           <button
             style={{
               marginTop: '0em',

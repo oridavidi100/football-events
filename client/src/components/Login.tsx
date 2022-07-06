@@ -87,10 +87,10 @@ function Login() {
           type="button"
           onClick={() => navigate('/forgetpassword')}
         >
-          Forget password
+          Forgot password ?
         </button>
         <p>
-          <span>Dont have account yet ?</span>
+          <span className="hasAccount">Don't have an account yet?</span>
           <button
             style={{
               marginLeft: '1em',

@@ -15,8 +15,8 @@ const initalState: InitalState = {
   user: '',
   events: '',
   button: '',
-  // baseUrl: 'https://ori-football-app.herokuapp.com',
-  baseUrl: '',
+  baseUrl: 'http://localhost:5000',
+  // baseUrl: '',
 };
 
 const rootreducer = (state = initalState, action: Action) => {
