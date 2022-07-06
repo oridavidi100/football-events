@@ -43,8 +43,15 @@ function Register() {
         </div>
       </div>
       <div className="login">
-        <p className="loginIntro">Register</p>
+        <p className="loginIntro">Sign up</p>
         <form onSubmit={e => handleSubmit(e)}>
+          <input
+            className="inputL"
+            type="text"
+            placeholder="full name"
+            ref={fullName}
+            required={true}
+          />
           <input
             type="text"
             placeholder="email "
@@ -59,6 +66,14 @@ function Register() {
             required={true}
             className="inputL"
           />
+          <span
+            style={{
+              color: 'white',
+            }}
+          >
+            {' '}
+            position :
+          </span>
           <select ref={position}>
             {postions.map((position: string) => {
               return <option value={position}>{position}</option>;
@@ -66,24 +81,17 @@ function Register() {
           </select>
           <input
             className="inputL"
-            type="text"
-            placeholder="full name"
-            ref={fullName}
-            required={true}
-          />
-          <input
-            className="inputL"
             type="password"
             placeholder="password"
             ref={password}
             required={true}
           />
-          <button type="submit" className="buttonl">
-            Register
+          <button type="submit" className="buttonl" id="signUpBtn">
+            Sign up
           </button>
         </form>
         <p>
-          <span className="hasAccount">Already have an account? ?</span>
+          <span className="hasAccount">Already have an account ?</span>
           <button
             style={{
               marginTop: '0em',
@@ -94,7 +102,7 @@ function Register() {
             type="button"
             onClick={() => navigate('/')}
           >
-            login
+            Login
           </button>
         </p>
       </div>

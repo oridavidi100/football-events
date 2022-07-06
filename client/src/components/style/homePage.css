@@ -252,7 +252,7 @@ ul {
   margin-block-start: -0.5em;
   margin-block-end: 1em;
   margin-inline-start: -8px;
-  margin-inline-end: 0px;
+  margin-inline-end: -0.5%;
   background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
   height: 20px;
   display: flex;

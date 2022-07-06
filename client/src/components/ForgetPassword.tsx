@@ -58,7 +58,7 @@ function ForgetPassword() {
             ref={nameOfPet}
             required={true}
           />
-          <button type="submit" className="buttonl">
+          <button id="changePasswordBtn" type="submit" className="buttonl">
             Change password
           </button>
         </form>

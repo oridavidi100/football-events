@@ -78,7 +78,7 @@ function Login() {
             ref={password}
             required={true}
           />
-          <button type="submit" className="buttonl">
+          <button type="submit" className="buttonl" id="loginBtn">
             Login
           </button>
         </form>
@@ -90,7 +90,7 @@ function Login() {
           Forgot password ?
         </button>
         <p>
-          <span className="hasAccount">Don't have an account yet?</span>
+          <span className="hasAccount">Don't have an account yet ?</span>
           <button
             style={{
               marginLeft: '1em',
@@ -100,7 +100,7 @@ function Login() {
             type="button"
             onClick={() => navigate('/register')}
           >
-            Register ?
+            Sign up
           </button>
         </p>
       </div>

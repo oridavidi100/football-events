@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { postions } from '../service/servicesfunc';
+import positionsPhoto from '../photos/positions.jpg';
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -48,6 +49,9 @@ function ProfilePage() {
               })}
             </select>
           </p>
+          <div className="">
+            <img src={positionsPhoto} alt="postions" style={{ width: '20%' }} />
+          </div>
         </div>
       )}
     </div>
