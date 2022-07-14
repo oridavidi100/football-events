@@ -14,10 +14,11 @@ function HomePage({
   eventShown: Event[];
   setEventShown: React.Dispatch<React.SetStateAction<Event[]>>;
 }) {
-  const baseUrl = useSelector((state: any) => state.baseUrl);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const search = useRef<string | any>('');
+
+  const baseUrl = useSelector((state: any) => state.baseUrl);
   let events = useSelector((state: any) => state.events);
   const user = useSelector((state: any) => state.user);
 

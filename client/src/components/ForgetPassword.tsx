@@ -1,18 +1,22 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Notyf } from 'notyf';
 import { useSelector } from 'react-redux';
 import ballPic from '../photos/ball.png';
-
 import 'notyf/notyf.min.css';
+
 function ForgetPassword() {
+  const notyf = new Notyf();
+
+  const navigate = useNavigate();
+
   const baseUrl = useSelector((state: any) => state.baseUrl);
+
   const email = useRef<string | any>('');
   const password = useRef<string | any>('');
   const nameOfPet = useRef<string | any>('');
-  const notyf = new Notyf();
-  const navigate = useNavigate();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {

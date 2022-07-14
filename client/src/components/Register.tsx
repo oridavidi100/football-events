@@ -8,14 +8,17 @@ import { postions } from '../service/servicesfunc';
 
 import 'notyf/notyf.min.css';
 function Register() {
+  const notyf = new Notyf();
   const navigate = useNavigate();
+
   const baseUrl = useSelector((state: any) => state.baseUrl);
+
   const email = useRef<string | any>('');
   const position = useRef<string | any>('');
   const password = useRef<string | any>('');
   const nameOfPet = useRef<string | any>('');
   const fullName = useRef<string | any>('');
-  const notyf = new Notyf();
+
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<any> => {
@@ -31,9 +34,9 @@ function Register() {
       navigate('/');
     } catch (err: any) {
       notyf.error(err.response.data.error);
-      console.log(err.response.data.error);
     }
   };
+
   return (
     <div className="loginDiv">
       <div className="webIntro">

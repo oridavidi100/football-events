@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import { setEvents } from '../reducer/actions/action';
 import { Event } from '../@types';
 import moment from 'moment';
@@ -9,19 +10,20 @@ import Login from './Login';
 import HomePage from './HomePage';
 import Register from './Register';
 import ForgetPassword from './ForgetPassword';
-import { useSelector, useDispatch } from 'react-redux';
 import EventPage from './EventPage';
 import ProfilePage from './ProfilePage';
 import Navbar from './Navbar';
 import Chat from './Chat';
 
 function App() {
-  const baseUrl = useSelector((state: any) => state.baseUrl);
-  const user = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
+
+  const baseUrl = useSelector((state: any) => state.baseUrl);
   const button = useSelector((state: any) => state.button);
   const events = useSelector((state: any) => state.events);
+
   const [eventShown, setEventShown] = useState<Event[]>(events);
+
   useEffect(() => {
     if (events) {
       setEventShown(events);
@@ -56,7 +58,6 @@ function App() {
                 />
               );
             })}
-          {/* <Route path="/:word/:partOfSpeech" element={<WordAndPos />} /> */}
           <Route path="/chat" element={<Chat eventId="" />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />

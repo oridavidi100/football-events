@@ -35,6 +35,7 @@ function ProfilePage() {
       console.log(err.response.data.error);
     }
   };
+
   return (
     <div className="profile">
       {user && (

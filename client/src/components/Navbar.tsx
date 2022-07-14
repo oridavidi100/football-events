@@ -20,6 +20,7 @@ function Navbar() {
   const notyf = new Notyf();
 
   const baseUrl = useSelector((state: any) => state.baseUrl);
+
   const location = useRef<string | any>('');
   const date = useRef<string | any>('');
   const imgSrc = useRef<string | any>('');

@@ -3,13 +3,15 @@ import { useSelector } from 'react-redux';
 import { io, Socket } from 'socket.io-client';
 import axios from 'axios';
 import moment from 'moment';
+
 function Chat({ eventId }: { eventId: string }) {
   const baseUrl = useSelector((state: any) => state.baseUrl);
   const user = useSelector((state: any) => state.user);
+
   const [message, setMessage] = useState<any>([]);
+
   const socketRef = useRef<Socket>();
   const inputM = useRef<string | any>('');
-  //nake the chat move to the bottom
 
   const messageEl = useRef<HTMLDivElement | null>(null);
   if (messageEl.current !== null) {
@@ -22,7 +24,7 @@ function Chat({ eventId }: { eventId: string }) {
   }
 
   useEffect(() => {
-    const res = axios
+    axios
       .get(`${baseUrl}/api/allMessages/${eventId}`)
       .then(res => {
         setMessage(res.data);
@@ -30,10 +32,12 @@ function Chat({ eventId }: { eventId: string }) {
       .catch(err => {
         console.log(err);
       });
+
     socketRef.current = io(`${baseUrl}`);
     socketRef.current!.emit('join', {
       room: eventId,
     });
+
     socketRef.current.on('messageBack', ({ name, message }) => {
       setMessage((prev: any) => [...prev, { name, message }]);
     });

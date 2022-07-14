@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Event, User } from '../@types';
 import { useSelector, useDispatch } from 'react-redux';
-import { setButton } from '../reducer/actions/action';
+import { setButton, setEvents } from '../reducer/actions/action';
 import { getCookie } from '../service/servicesfunc';
 import moment from 'moment';
-import { setEvents } from '../reducer/actions/action';
 import Chat from './Chat';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 
 function EventPage({ event }: { event: Event }) {
-  const baseUrl = useSelector((state: any) => state.baseUrl);
-  const notyf = new Notyf();
-  const user = useSelector((state: any) => state.user);
-  const button = useSelector((state: any) => state.button);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [date, setDate] = useState(moment(event.date).format('DD/MM/YYYY'));
-  // const [time, setTime] = useState(moment(event.date).format('HH:mm'));
+
+  const notyf = new Notyf();
+
+  const baseUrl = useSelector((state: any) => state.baseUrl);
+  const user = useSelector((state: any) => state.user);
+  const button = useSelector((state: any) => state.button);
 
   useEffect((): any => {
     if (!document.cookie) {
@@ -37,11 +36,8 @@ function EventPage({ event }: { event: Event }) {
   }, []);
 
   const deleteEvent = async () => {
-    const config = {
-      headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
-    };
     try {
-      const res = await axios.delete(`${baseUrl}/api/Event/deleteEvent`, {
+      await axios.delete(`${baseUrl}/api/Event/deleteEvent`, {
         headers: {
           Authorization: `Bearer ${getCookie('accessToken')}`,
         },
@@ -106,7 +102,6 @@ function EventPage({ event }: { event: Event }) {
       console.log(err.response.data.error);
     }
   };
-  console.log(moment(event.date).format('HH:mm'));
 
   return (
     <div className="eventpage">

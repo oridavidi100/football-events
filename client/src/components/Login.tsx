@@ -1,21 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './style/login.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../reducer/actions/action';
 import { getCookie } from '../service/servicesfunc';
 import { Notyf } from 'notyf';
-
 import ballPic from '../photos/ball.png';
+import './style/login.css';
 import 'notyf/notyf.min.css';
+
 function Login() {
   const notyf = new Notyf();
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const baseUrl = useSelector((state: any) => state.baseUrl);
+
   const email = useRef<string | any>('');
   const password = useRef<string | any>('');
-  const navigate = useNavigate();
+
   useEffect(() => {
     //function that check if the user is logged in before
 
@@ -34,6 +38,7 @@ function Login() {
         });
     }
   }, []);
+
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<any> => {
@@ -52,6 +57,7 @@ function Login() {
       notyf.error(err.response.data.error);
     }
   };
+
   return (
     <div className="loginDiv">
       <div className="webIntro">
