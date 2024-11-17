@@ -34,11 +34,11 @@ function HomePage({
     setEventShown(events);
   }, []);
 
-  useEffect(() => {
-    if (!document.cookie || !user) {
-      navigate('/');
-    }
-  });
+  // useEffect(() => {
+  //   if (!document.cookie || !user) {
+  //     navigate('/');
+  //   }
+  // });
 
   const handleChange = () => {
     const searchI = search.current.value.toLocaleLowerCase();
